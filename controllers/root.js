@@ -1,10 +1,12 @@
 const router = require('express').Router();
-
+const asanaClient = require('../helpers/asanaClient');
 //router.use(someMiddleware);
 
 router.get('/', function(req,res){
-	//res.status(200).json({ message: 'root!' })
-	res.render('login.hbs', {'greeting':'Hello'});
+
+	var client = asanaClient();
+
+	res.render('login.hbs', {'greeting':'Hello',asanaAuthorizeUrl:client.app.asanaAuthorizeUrl()});
 });
 
 module.exports = router;
