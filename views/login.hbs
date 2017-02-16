@@ -21,9 +21,17 @@
 <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
         <div class="jumbotron">
-            <h1>Hello,</h1>
-            <p><i class="fa fa-github" aria-hidden="true"></i>Eventually, this will make sense :)</p>
-            <p><a class="btn btn-primary-asana btn-lg" href="{{asanaAuthorizeUrl}}" role="button">Login with Asana</a></p>
+            <h1>AWM</h1>
+            <p>
+                AWM (Asana Webhooks Manager) is an open source, straight forward, webhooks manager and event handler for Asana's webhooks API.<br/>
+                Read the docs on <a href="https://github.com/EyalRonel/asana-webhooks-manager">Github</a>, or simply login below to get started.
+
+            </p>
+            {{#if user}}
+                <p>Hi {{user.name}}</p>
+            {{else}}
+                <p><a class="btn btn-primary-asana btn-lg" href="{{asanaAuthorizeUrl}}" role="button">Login with Asana</a></p>
+            {{/if}}
         </div>
     </div>
 </div>
