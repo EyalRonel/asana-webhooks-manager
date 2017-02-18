@@ -5,6 +5,7 @@ router.get('/', function(req,res){
 	var client = asanaClient();
 
 	var viewData = {
+		greeting:'Hello',
 		asanaAuthorizeUrl:client.app.asanaAuthorizeUrl(),
 		user:null,
 	};
