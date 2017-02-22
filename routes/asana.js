@@ -1,8 +1,9 @@
 const router      = require('express').Router()
 const asanaClient = require('../helpers/asanaClient');
 const response    = require('../helpers/response');
+const restrictedAcess  = require('../middlewares/restrictedAccess');
 
-//router.use(someMiddleware);
+router.use(restrictedAcess);
 
 /**
  * GET /me - returns the currently logged in user object

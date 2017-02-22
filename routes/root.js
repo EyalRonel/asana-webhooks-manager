@@ -27,4 +27,13 @@ router.get('/', function(req,res){
 
 //router.use(someMiddleware);
 
+router.get('/test',function(req,res,next){
+
+	const rootController = require('../controllers/root');
+	var rootCtrl =  new rootController(req,res).test();
+
+
+
+});
+
 module.exports = router;
