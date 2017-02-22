@@ -6,26 +6,12 @@ const cookieParser = require('cookie-parser')
 
 var app = express();
 
-
-var restResponse = function (req, res, next) {
-	res.restResponse = function(code,data,msg){
-		return res.status(code).json(
-			{
-				code: code,
-				data: data,
-				msg: msg
-			}
-		);
-	};
-	next();
-}
-
 hbs.registerPartials(__dirname+'/views/partials');
 
 app.set('view engine','hbs');
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
-app.use(restResponse);
+//app.use(restResponse);
 app.use('/',routes);
 
 
