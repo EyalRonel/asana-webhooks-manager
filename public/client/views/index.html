@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <!--Stylesheets-->
+    <link rel='stylesheet' href='/libs/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/libs/bootstrap/css/bootstrap-theme.min.css'>
+    <link rel='stylesheet' href='/css/style.css'/>
+
+    <!--Libraries-->
+    <script src="/libs/jquery/jquery-3.1.1.min.js"></script>
+    <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/libs/angular/angular.1.5.6.min.js"></script>
+
+    <!--Angular Utilities-->
+    <script src="/libs/angular/angular-ui-router.0.4.2.min.js"></script>
+
+    <!--Application-->
+    <script src="/client/app.module.js"></script>
+    <script src="/client/components/main.js"></script>
+
+    <!--Controllers-->
+    <script src="/client/controllers/mainController.js"></script>
+
+    <!--Routes-->
+    <script src="/client/app.routes.js"></script>
+
+</head>
+<body ng-app>
+HI
+<ui-view></ui-view>
+<!--<nav class="navbar navbar-default">-->
+    <!--<div class="container-fluid">-->
+        <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+        <!--<div class="navbar-header">-->
+            <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">-->
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+            <!--</button>-->
+            <!--<a class="navbar-brand" href="#">AWM</a>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+        <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+            <!--<ul class="nav navbar-nav">-->
+                <!--<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>-->
+                <!--&lt;!&ndash;<li><a href="#">Home</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="dropdown">&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">Action</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">Another action</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">Something else here</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li role="separator" class="divider"></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">Separated link</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li role="separator" class="divider"></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">One more separated link</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--</ul>-->
+            <!--&lt;!&ndash;<form class="navbar-form navbar-left">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control" placeholder="Search">&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<button type="submit" class="btn btn-default">Submit</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+
+                <!--&lt;!&ndash;{{#if user}}&ndash;&gt;-->
+                <!--<li class="dropdown">-->
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">-->
+                        <!--{{user.name}}<span class="caret"></span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li><a href="#">Action</a></li>-->
+                        <!--<li><a href="#">Another action</a></li>-->
+                        <!--<li><a href="#">Something else here</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a href="#">Log out</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--&lt;!&ndash;{{else}}&ndash;&gt;-->
+                <!--<li><a href="#">Login</a></li>-->
+                <!--&lt;!&ndash;{{/if}}&ndash;&gt;-->
+            <!--</ul>-->
+        <!--</div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+<!--</nav>-->
+
+<!--<div class="container">-->
+    <!--<div class="row">-->
+        <!--<div class="col-lg-10 col-lg-offset-1">-->
+            <!--<div class="jumbotron">-->
+                <!--<h1>AWM</h1>-->
+                <!--<p>-->
+                    <!--AWM (Asana Webhooks Manager) is an open source, straight forward, webhooks manager and event handler for Asana's webhooks API.<br/>-->
+                    <!--Read the docs on <a href="https://github.com/EyalRonel/asana-webhooks-manager">Github</a>, or simply login below to get started.-->
+
+                <!--</p>-->
+                <!--&lt;!&ndash;{{#if user}}&ndash;&gt;-->
+                <!--<p>Hi</p>-->
+                <!--&lt;!&ndash;{{else}}&ndash;&gt;-->
+                <!--<p><a class="btn btn-primary-asana btn-lg" href="{{asanaAuthorizeUrl}}" role="button">Login with Asana</a></p>-->
+                <!--&lt;!&ndash;{{/if}}&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+</body>
+</html>

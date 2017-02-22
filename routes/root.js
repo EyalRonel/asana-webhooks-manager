@@ -1,6 +1,12 @@
 const router = require('express').Router();
+const path    = require("path");
 const asanaClient = require('../helpers/asanaClient');
-router.get('/', function(req,res){
+
+router.get('/',function(req,res){
+	res.sendFile(path.join(__dirname,'../public/client/views','index.html'));
+});
+
+router.get('/server', function(req,res){
 
 	var client = asanaClient();
 
