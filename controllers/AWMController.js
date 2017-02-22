@@ -9,6 +9,7 @@
  * @returns {AWMController}
  * */
 class AWMController {
+
 	constructor(req,res){
 
 		/**
@@ -20,13 +21,6 @@ class AWMController {
 		 * response - Express response Object
 		 * */
 		this._response = res;
-
-
-		/**
-		 * protected {Boolean} - Determines if the controller requires authentication to access
-		 * */
-		this._protected = false;
-
 
 		/**
 		 * defaultMessages {Dictionary} - default textual messages for commonly used response codes
@@ -43,6 +37,7 @@ class AWMController {
 			404: "Not Found",
 			405: "Method Not Allowed"
 		}
+
 
 	}
 
@@ -78,6 +73,8 @@ class AWMController {
 			}
 		);
 	}
+
+
 }
 
 module.exports = AWMController;
