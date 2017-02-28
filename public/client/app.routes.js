@@ -3,13 +3,22 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 	$urlRouterProvider.otherwise("/");
 
 	$stateProvider
-		.state('home', {
+		.state('root', {
 			url: '/',
 			views: {
 				'@': {
 					templateUrl: '/client/views/main.html',
 					//controllerAs: 'layoutCtrl',
 					//controller: 'layoutController'
+				},
+				'header@root':{
+					templateUrl: '/client/views/header.html',
+				},
+				'body@root':{
+					templateUrl: '/client/views/body.html'
+				},
+				'footer@root':{
+					templateUrl: '/client/views/footer.html'
 				}
 			}
 		})
