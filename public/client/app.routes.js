@@ -1,10 +1,18 @@
-awmApp.config(function($stateProvider) {
+awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
 
-	var mainState = {
-		name: 'main',
-		url: '/',
-		component: 'main'
-	};
+	$urlRouterProvider.otherwise("/");
 
-	$stateProvider.state(mainState);
-});
+	$stateProvider
+		.state('home', {
+			url: '/',
+			views: {
+				'@': {
+					templateUrl: '/client/views/main.html',
+					//controllerAs: 'layoutCtrl',
+					//controller: 'layoutController'
+				}
+			}
+		})
+
+}]);
+
