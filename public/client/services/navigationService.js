@@ -25,7 +25,6 @@
 	};
 
 
-
 	navigationService.prototype.goToState = function(stateName){
 
 		for (var i=0;i<this.pages.length;i++){
