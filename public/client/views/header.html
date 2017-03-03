@@ -14,9 +14,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Manage</a></li>
-                <li><a href="#">Docs</a></li>
+
+                <li ng-repeat="page in headerCtrl.pages" ng-class="page.active ? 'active' : ''" ng-click="headerCtrl.goToState(page.state)">
+                    <a>{{page.title}}</a>
+                </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
@@ -37,6 +39,6 @@
                 <li><a href="#">Login</a></li>
                 <!--{{/if}}-->
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>

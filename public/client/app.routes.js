@@ -8,11 +8,13 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 			views: {
 				'@': {
 					templateUrl: '/client/views/main.html',
-					//controllerAs: 'layoutCtrl',
 					//controller: 'layoutController'
+					//controllerAs: 'layoutCtrl'
 				},
 				'header@root':{
 					templateUrl: '/client/views/header.html',
+					controller: 'headerController',
+					controllerAs: 'headerCtrl'
 				},
 				'body@root':{
 					templateUrl: '/client/views/body.html'
