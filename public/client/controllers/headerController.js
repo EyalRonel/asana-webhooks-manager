@@ -1,43 +1,12 @@
-var headerController = function($scope,$state){
+(function(){
 
-	this.$scope = $scope;
-	this.$state = $state;
+	var headerController = function($scope,navigationService){
 
-	this.pages = [
-		{
-			title: "Home",
-			state: "root",
-			active: true
-		},
-		{
-			title: "Manage",
-			state: "manage",
-			active: false
-		},
-		{
-			title: "Docs",
-			state: "docs",
-			active: false
-		}
-	];
+		this.$scope = $scope;
+		this.navigationService = navigationService;
 
-};
+	};
 
-headerController.prototype.goToState = function(stateName){
+	awmApp.controller('headerController', ['$scope', 'navigationService',headerController]);
 
-	for (var i=0;i<this.pages.length;i++){
-
-		this.pages[i].active = false;
-		if (this.pages[i].state == stateName) this.pages[i].active = true;
-
-	}
-
-	this.$state.go(stateName);
-
-};
-
-
-
-
-
-awmApp.controller('headerController', ['$scope', '$state',headerController]);
+})();

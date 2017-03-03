@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-                <li ng-repeat="page in headerCtrl.pages" ng-class="page.active ? 'active' : ''" ng-click="headerCtrl.goToState(page.state)">
+                <li ng-repeat="page in headerCtrl.navigationService.pages" ng-class="page.active ? 'active' : ''" ng-click="headerCtrl.navigationService.goToState(page.state)">
                     <a>{{page.title}}</a>
                 </li>
 
