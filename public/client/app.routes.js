@@ -1,10 +1,10 @@
 awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
 
-	$urlRouterProvider.otherwise("/");
+	$urlRouterProvider.otherwise("");
 
 	$stateProvider
 		.state('root', {
-			url: '/',
+			url: '',
 			views: {
 				'@': {
 					templateUrl: '/client/views/main.html',
@@ -22,6 +22,23 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 				}
 			}
 		})
-
+		.state('manage', {
+			parent:'root',
+			url: '/manage',
+			views: {
+				'body':{
+					templateUrl: '/client/views/manage.html'
+				}
+			}
+		})
+		.state('docs', {
+			parent:'root',
+			url: '/docs',
+			views: {
+				'body':{
+					templateUrl: '/client/views/docs.html'
+				}
+			}
+		})
 }]);
 
