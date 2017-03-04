@@ -8,8 +8,8 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 			views: {
 				'@': {
 					templateUrl: '/client/views/main.html',
-					//controller: 'layoutController'
-					//controllerAs: 'layoutCtrl'
+					controller: 'mainController',
+					controllerAs: 'mainCtrl'
 				},
 				'header@root':{
 					templateUrl: '/client/views/header.html',
@@ -22,7 +22,7 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 				'footer@root':{
 					templateUrl: '/client/views/footer.html'
 				}
-			}
+			},
 		})
 		.state('manage', {
 			parent:'root',
@@ -43,4 +43,3 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 			}
 		})
 }]);
-

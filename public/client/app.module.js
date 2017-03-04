@@ -1,1 +1,2 @@
-var awmApp = angular.module('awmApp', ['ui.router']);
+var awmApp = angular.module('awmApp', ['ui.router','ngCookies']);
+
