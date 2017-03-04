@@ -40,4 +40,8 @@ router.get('/webhooks/:workspaceId',function(req,res) {
 		.catch(function (err) { return response(res, 400, response, err); });
 });
 
+router.get("/test",function(req,res){
+	return response(200,"Hi");
+});
+
 module.exports = router;

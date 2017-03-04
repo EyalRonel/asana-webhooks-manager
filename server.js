@@ -18,3 +18,5 @@ app.use('/',routes);
 
 app.listen(3000);
 console.log('App running...!');
+
+module.exports.app = app;
