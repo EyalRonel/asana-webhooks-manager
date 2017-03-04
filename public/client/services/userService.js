@@ -14,7 +14,7 @@
 
 
 	/**
-	 * isLoggedIn - a utility method, checks if login cookie exists and returns true/false accordingly
+	 * isLoggedIn - a utility method checking if a "login cookie" exists
 	 *
 	 * @returns {Boolean}
 	 * */

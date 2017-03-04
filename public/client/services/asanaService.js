@@ -18,34 +18,24 @@
 	 * @param {Boolean} refresh (optional) - if true, refreshes the user object by refecthing form Asana, otherwise returns the cached value
 	 * @returns {Promise}
 	 * */
-	asanaService.prototype.getUser = function(refresh){
+	asanaService.prototype.getUser = function(){
 
 		var deferred = this.$q.defer();
 
-		if (this._user == null || refresh == true)
-		{
+		this.$http.get(this.config.ASANA_API_CURRENT_USER, {})
+			.then(
 
-			this.$http.get(this.config.ASANA_API_CURRENT_USER, {})
-				.then(
+				//Success
+				function (response) {
+					deferred.resolve(response.data.data);
+				}.bind(this),
 
-					//Success
-					function (response) {
-						this.setUser(response.data.data);
-						deferred.resolve(response.data.data);
-					}.bind(this),
+				//Failure
+				function (response) {
+					deferred.reject(response);
+				}.bind(this)
 
-					//Failure
-					function (response) {
-						this.setUser(null);
-						deferred.reject(response);
-					}.bind(this)
-
-				);
-		}
-
-		else {
-			deferred.resolve(this._user);
-		}
+			);
 
 		return deferred.promise;
 	};

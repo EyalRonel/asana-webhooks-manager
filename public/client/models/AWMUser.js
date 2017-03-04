@@ -23,7 +23,7 @@ AWM.User = function(id,name,email,photo,workspaces){
 	this._email = null;
 
 	/**
-	 * _photo {AWM.UserImage}
+	 * _photo {AWM.Photo}
 	 * */
 	this._photo = null;
 
@@ -101,7 +101,7 @@ AWM.User.prototype.getEmail = function(){
  * @param {String} email
  * @return {AWM.User}
  * */
-AWM.User.prototype.setName = function(email){
+AWM.User.prototype.setEmail = function(email){
 	this._email = email;
 	return this;
 };
@@ -141,7 +141,7 @@ AWM.User.prototype.getWorkspaces = function(){
  * @param {[AWM.Workspace]} workspacesArray
  * @return {AWM.User}
  * */
-AWM.User.prototype.setImage = function(workspacesArray){
+AWM.User.prototype.setWorkspaces = function(workspacesArray){
 	this._workspaces = workspacesArray;
 	return this;
 };
