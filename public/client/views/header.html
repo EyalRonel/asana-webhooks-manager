@@ -22,10 +22,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
-                <!--{{#if user}}-->
-                <li class="dropdown">
+                <li class="dropdown" ng-if="headerCtrl.userService.isLoggedIn()">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        {{user.name}}<span class="caret"></span>
+                        <img class="nav-bar-user-image" src="{{headerCtrl.userService.getUser().getPhoto().get('s')}}" />
+                        {{headerCtrl.userService.getUser().getName()}} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Action</a></li>
@@ -35,9 +35,9 @@
                         <li><a href="#">Log out</a></li>
                     </ul>
                 </li>
-                <!--{{else}}-->
-                <li><a href="#">Login</a></li>
-                <!--{{/if}}-->
+
+                <li ng-if="!headerCtrl.userService.isLoggedIn()"><a href="oauth/asana/login">Login</a></li>
+
             </ul>
         </div>
     </div>

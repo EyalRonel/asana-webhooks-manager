@@ -34,9 +34,7 @@
 
 					//Redirect to webhooks managerment screen
 					this.navigationService.goToState('manage');
-
-					debugger;
-
+					
 				}
 
 				//Go back to main screen
