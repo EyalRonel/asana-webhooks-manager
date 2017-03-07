@@ -14,9 +14,11 @@ app.use(cookieParser());
 //app.use(restResponse);
 app.use('/',routes);
 
+if(!module.parent){ app.listen(3000,function(){
+	console.log('App running...!');
+	});
+}
 
 
-app.listen(3000);
-console.log('App running...!');
 
 module.exports.app = app;
