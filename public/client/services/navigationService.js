@@ -25,7 +25,12 @@
 	};
 
 
-	navigationService.prototype.goToState = function(stateName){
+	navigationService.prototype.goToState = function(stateName,params,options){
+
+		if (typeof params == "undefined") params  = {};
+		if (typeof options == "undefined") options  = {};
+
+		if (this.$state.current.name == stateName) return;
 
 		for (var i=0;i<this.pages.length;i++){
 
@@ -34,7 +39,7 @@
 
 		}
 
-		this.$state.go(stateName);
+		this.$state.go(stateName,params,options);
 	};
 
 	awmApp.service("navigationService", ['$state', navigationService]);

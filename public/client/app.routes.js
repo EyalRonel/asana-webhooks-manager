@@ -23,13 +23,21 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 					templateUrl: '/client/views/footer.html'
 				}
 			},
+			resolve:{
+				resolveService: 'resolveService',
+				auth: function(resolveService){
+					return resolveService.init();
+				}
+			}
 		})
 		.state('manage', {
 			parent:'root',
 			url: '/manage',
 			views: {
 				'body':{
-					templateUrl: '/client/views/manage.html'
+					templateUrl: '/client/views/manage.html',
+					controller: 'manageController',
+					controllerAs: 'manageCtrl'
 				}
 			}
 		})
