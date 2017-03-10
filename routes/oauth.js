@@ -7,8 +7,10 @@ const asanaClient = require('../helpers/asanaClient');
  * Redirects the user to Asana's redirect uri
  * */
 router.get('/asana/login',function(req,res){
-  var client = asanaClient();
-  res.redirect(client.app.asanaAuthorizeUrl())
+
+  const oauthController = require('../controllers/oauth');
+  var oauthCtrl =  new oauthController(req,res).login();
+  
 });
 
 
