@@ -54,7 +54,7 @@ AWM.Photo.prototype.get = function(size){
  * */
 AWM.Photo.prototype.set = function(size,url){
 	if (this.hasOwnProperty(size)) this[size] = url;
-	else throw new Error(`AWM.Photo - unable to set url for size: {size}. No such size.`);
+	else throw new Error('AWM.Photo - unable to set url for size: {size}. No such size.');
 
 	return this;
 };
