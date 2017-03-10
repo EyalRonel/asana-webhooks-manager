@@ -8,13 +8,7 @@
 		this.userService = userService;
 		this.asanaService = asanaService;
 		this.navigationService = navigationService;
-
-		$rootScope.$on('$stateChangeStart',
-			function(event, toState, toParams, fromState, fromParams){
-				console.log('from',fromState.name,'to',toState.name);
-
-			}.bind(this));
-
+		
 	};
 
 
