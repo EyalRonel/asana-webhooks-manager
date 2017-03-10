@@ -3,22 +3,28 @@
  * */
 (function(){
 
-	var resolveService = function(asanaService,userService,navigationService){
+	var resolveService = function(asanaService,userService,navigationService,$q){
 
 		this.asanaService = asanaService;
 		this.userService = userService;
 		this.navigationService = navigationService;
+		this.$q = $q;
 
 	};
 
 	resolveService.prototype.init = function(){
-		return this.asanaService.getUser().then(
-			function(payload){this.resolve(payload)}.bind(this),
-			function(){this.reject}.bind(this)
+
+		var promise = this.$q.defer();
+
+		this.asanaService.getUser().then(
+			function(payload){this.resolve(payload,promise)}.bind(this),
+			function(){this.reject(promise)}.bind(this)
 		);
+
+		return promise;
 	};
 
-	resolveService.prototype.resolve = function(payload){
+	resolveService.prototype.resolve = function(payload,promise){
 
 		//Handle successful login by initializing the user model
 		if (payload == null){
@@ -40,17 +46,14 @@
 		var AWMUser = new AWM.User(payload.id,payload.name,payload.email,photo,workspaces);
 		this.userService.setUser(AWMUser);
 
-		return true;
-
-		console.log('re-serv resolve');
+		promise.resolve(this.userService.getUser());
 	};
 
-	resolveService.prototype.reject = function(){
+	resolveService.prototype.reject = function(promise){
 		//Do nothing
-		return false;
-		console.log('re-serv reject');
+		promise.reject();
 	};
 
-	awmApp.service("resolveService", ['asanaService','userService','navigationService',resolveService]);
+	awmApp.service("resolveService", ['asanaService','userService','navigationService','$q',resolveService]);
 
 })();
