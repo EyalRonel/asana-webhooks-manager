@@ -1,6 +1,6 @@
 (function(){
 
-	var manageController = function($scope,userService, asanaService,navigationService){
+	var manageController = function($scope,userService, asanaService,navigationService, user){
 
 		this.$scope = $scope;
 		this.userService = userService;
@@ -8,7 +8,6 @@
 		this.navigationService = navigationService;
 
 		this.workspaces = [];
-
 
 		this.init();
 
@@ -19,9 +18,22 @@
 			this.navigationService.goToState('root');
 			return;
 		}
+
 		this.workspaces = this.userService.getUser().getWorkspaces();
 	};
 
-	awmApp.controller('manageController', ['$scope', 'userService', 'asanaService','navigationService',manageController]);
+	manageController.prototype.getProjects = function(workspaceId){
+		this.asanaService.getProjects(workspaceId).then(
+			function(projects){
+
+				//TODO: handle projects response
+				console.log(projects);
+			}.bind(this),
+			function(error){}.bind(this)
+		);
+	};
+
+
+	awmApp.controller('manageController', ['$scope', 'userService', 'asanaService','navigationService','user',manageController]);
 
 })();
