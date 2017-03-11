@@ -40,6 +40,36 @@
 		return deferred.promise;
 	};
 
+
+	asanaService.prototype.getProjects = function(workspaceId){
+
+		if (typeof workspaceId == "undefined") throw new Error("Must provide a workspaceId");
+
+		var deferred = this.$q.defer();
+
+		this.$http.get(this.config.ASANA_API_PROJECTS + '/' + workspaceId, {})
+			.then(
+
+				//Success
+				function (response) {
+					deferred.resolve(response.data.data);
+				}.bind(this),
+
+				//Failure
+				function (response) {
+					deferred.reject(response);
+				}.bind(this)
+
+			);
+
+		return deferred.promise;
+	};
+
+
+
+
+
+
 	awmApp.service("asanaService", ['$http','$q','config',asanaService]);
 
 })();

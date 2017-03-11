@@ -56,8 +56,8 @@ router.get('/projects/:workspaceId',function(req,res) {
 	var client = asanaClient(token);
 
 	client.projects.findByWorkspace(req.params.workspaceId)
-		.then(function (workspaces) {
-			return response(res, 200, workspaces.data,"");
+		.then(function (projects) {
+			return response(res, 200, projects.data,"");
 		})
 		.catch(function (err) {
 			return response(res, 400, {}, err);
@@ -84,8 +84,5 @@ router.get('/webhooks/:workspaceId',function(req,res) {
 		.catch(function (err) { return response(res, 400, response, err); });
 });
 
-router.get("/test",function(req,res){
-	return response(200,"Hi");
-});
 
 module.exports = router;
