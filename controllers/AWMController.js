@@ -59,7 +59,7 @@ class AWMController {
 	 * @param {<Any Object>}  data - A response payload
 	 * @param {String}        msg  - An optional message string
 	 * */
-	response(code,data,msg){
+	reply(code,data,msg){
 
 		if (!code) throw new Error(this.constructor.name + " response must contain a status code");
 		if (!data) data = {};
