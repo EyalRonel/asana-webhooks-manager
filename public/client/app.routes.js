@@ -25,8 +25,8 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 			},
 			resolve:{
 				resolveService: 'resolveService',
-				auth: function(resolveService){
-					return resolveService.init();
+				user: function(resolveService){
+					return resolveService.resolveUser();
 				}
 			}
 		})
