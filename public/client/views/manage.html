@@ -20,21 +20,35 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="workspace in manageCtrl.workspaces track by $index">
-                            <th scope="row">{{$index+1}}</th>
+                        <tr ng-repeat-start="workspace in manageCtrl.workspaces track by $index">
+                            <td scope="row">{{$index+1}}</td>
                             <td>{{workspace.getName()}}</td>
-                            <td>
-                                <span class="label label-info">32</span> Projects
-                                <span class="label label-success">15</span> Tasks
-                            </td>
-                            <td><span class="label label-warning">2</span> Notices
-                            </td>
-                            <td>
-                                <button class="btn btn-default btn-sm" type="button" ng-click="manageCtrl.getProjects(workspace.getId())">
-                                    View
-                                </button>
+                            <td><span class="label label-info">32</span> Projects <span class="label label-success">15</span> Tasks</td>
+                            <td><span class="label label-warning">2</span> Notices</td>
+                            <td><button class="btn btn-default btn-sm" type="button" ng-click="manageCtrl.getProjects($index)">View</button></td>
+                        </tr>
+                        <tr ng-show="workspace.getProjects().length > 0">
+                            <td colspan="5">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Project name</th>
+                                        <th>Subscription</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="project in workspace.getProjects() track by $index">
+                                            <td scope="row">{{$index+1}}</td>
+                                            <td>{{project.getName()}}</td>
+                                            <td>subscribe</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </td>
                         </tr>
+                        <tr ng-repeat-end></tr>
+
                         </tbody>
                     </table>
                 </div>
