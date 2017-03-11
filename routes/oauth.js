@@ -9,8 +9,8 @@ const asanaClient = require('../helpers/asanaClient');
 router.get('/asana/login',function(req,res){
 
   const oauthController = require('../controllers/oauth');
-  var oauthCtrl =  new oauthController(req,res).login();
-  
+  var oauthCtrl =  new oauthController(req,res).loginWithAsana();
+
 });
 
 
@@ -21,26 +21,20 @@ router.get('/asana/login',function(req,res){
  * */
 router.get('/asana',function(req,res){
 
+  const oauthController = require('../controllers/oauth');
+  var oauthCtrl =  new oauthController(req,res);
+
   var code = req.query.code;
-  if (code) {
-    var client = asanaClient();
-    client.app.accessTokenFromCode(code).then(function(credentials) {
-
-      //Set a secure HTTP Only cookie to hold the token
-      res.cookie('token', credentials.access_token, { httpOnly : true, secure: true,  maxAge: 60 * 60 * 1000 });
-
-      //Set a utility cookie that expires along with the token, yet accessible to the client via javascript
-      res.cookie('awm_login', true, {maxAge: 60 * 60 * 1000 });
-
-      //Rediect to app
-      res.redirect('/');
-    });
-  } else {
-    res.end('Error getting authorization: ' + req.query.error);
+  if (code)
+  {
+    oauthCtrl.accessTokenFromCode(code);
   }
-
+  else
+  {
+    oauthCtrl.reply(400,{},"Unable to exchange code for access token");
+  }
+  
 });
-
 
 
 module.exports = router;
