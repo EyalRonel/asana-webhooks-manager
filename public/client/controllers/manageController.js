@@ -9,7 +9,7 @@
 		this.navigationService = navigationService;
 
 		this.workspaces = [];
-		
+
 		this.init();
 
 	};
@@ -44,6 +44,8 @@
 			function(error){}.bind(this)
 		);
 	};
+
+
 
 
 	awmApp.controller('manageController', ['$scope', '$timeout','userService', 'asanaService','navigationService','user',manageController]);

@@ -9,6 +9,7 @@
 	config.ASANA_API_CURRENT_USER = config.BASE_ASANA_API_URL + "/me";
 	config.ASANA_API_WORKSPACES = config.BASE_ASANA_API_URL + "/workspaces";
 	config.ASANA_API_PROJECTS = config.BASE_ASANA_API_URL + "/projects";
+	config.ASANA_API_WEBHOOKS = config.BASE_ASANA_API_URL + "/webhooks";
 
 	awmApp.constant('config',config);
 

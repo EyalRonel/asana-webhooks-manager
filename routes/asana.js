@@ -44,7 +44,7 @@ router.get('/workspaces',function(req,res) {
 });
 
 /**
- * GET /projects - returns a list of projects for a provided workspace
+ * GET /projects - returns a list of projects for a given workspaceId
  * */
 router.get('/projects/:workspaceId',function(req,res) {
 
@@ -84,5 +84,25 @@ router.get('/webhooks/:workspaceId',function(req,res) {
 		.catch(function (err) { return response(res, 400, response, err); });
 });
 
+
+router.post('/webhooks/:resourceId',function(req,res) {
+
+	console.log(req.protocol + '://' + req.get('host'));
+
+	if (!req.cookies.token) return response(res, 400, {}, "Missing token");
+	if (!req.params.resourceId) return response(res, 400, {}, "Missing resourceId");
+
+	var token = req.cookies.token;
+	var resourceId = req.params.resourceId;
+
+	var client = asanaClient(token);
+	client.webhooks.create(resourceId, "https://" + req.get('host') + "/events/incoming/"+resourceId).then(
+		function (response) {
+			return res.status(200).json(response);
+		})
+		.catch(function (err) {
+			return res.status(400).json(err);
+		});
+});
 
 module.exports = router;

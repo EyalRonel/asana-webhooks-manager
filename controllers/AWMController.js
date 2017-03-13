@@ -1,4 +1,3 @@
-
 /**
  * AWMController - A Base controller with utility methods
  * Mainly used to validate auth, define a default JSON response structor and helper methods, etc
@@ -53,7 +52,25 @@ class AWMController {
 	}
 
 	/**
-	 * response - a utility function to define a default JSON repsonse structure
+	 * request
+	 * @rertuns {http.request}
+	 * */
+	request(){
+		return this._request;
+	}
+
+	/**
+	 * response
+	 * @returns {http.response}
+	 * */
+	response(){
+		return this._response;
+	}
+
+
+
+	/**
+	 * reply - a utility function to define a default JSON response structure
 	 *
 	 * @param {Integer}       code - an HTTP response code
 	 * @param {<Any Object>}  data - A response payload

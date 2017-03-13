@@ -41,7 +41,10 @@
                                         <tr ng-repeat="project in workspace.getProjects() track by $index">
                                             <td scope="row">{{$index+1}}</td>
                                             <td>{{project.getName()}}</td>
-                                            <td>subscribe</td>
+                                            <td>
+                                                <button type = "button" class = "btn btn-success" ng-click="manageCtrl.asanaService.subscribe(project.getId())">Subscribe</button>
+                                                <button type = "button" class = "btn btn-success" ng-click="manageCtrl.asanaService.unsubscribe(project.getId())">Unsubscribe</button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

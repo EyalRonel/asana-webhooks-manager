@@ -65,6 +65,29 @@
 		return deferred.promise;
 	};
 
+	asanaService.prototype.subscribe = function(resourceId){
+		if (typeof resourceId == "undefined") throw new Error("Must provide a resourceId");
+
+		var deferred = this.$q.defer();
+
+		this.$http.post(this.config.ASANA_API_WEBHOOKS + '/' + resourceId, {})
+			.then(
+
+				//Success
+				function (response) {
+					deferred.resolve(response.data);
+				}.bind(this),
+
+				//Failure
+				function (response) {
+					deferred.reject(response);
+				}.bind(this)
+
+			);
+
+		return deferred.promise;
+	};
+
 
 
 
