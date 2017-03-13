@@ -16,6 +16,7 @@
   "homepage": "https://bitbucket.org/dometrix/dometrix-api-server#readme",
   "dependencies": {
     "asana": "^0.15.0",
+    "body-parser": "^1.17.1",
     "change-case": "^3.0.1",
     "cookie-parser": "^1.4.3",
     "elasticsearch": "^12.1.3",
