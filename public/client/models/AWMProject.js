@@ -17,10 +17,16 @@ AWM.Project = function(id,name){
 	this._name = null;
 
 	/**
+	 * _webhooks {AWM.Webhook} - Project's webhook (if exists)
+	 * */
+	this._webhook = null;
+
+	/**
 	 * Init instance with passed arguments
 	 * */
 	if (id) this.setId(id);
 	if (name) this.setName(name);
+
 
 
 };
@@ -63,5 +69,26 @@ AWM.Project.prototype.getName = function(){
  * */
 AWM.Project.prototype.setName = function(name){
 	this._name = name;
+	return this;
+};
+
+
+/**
+ * getWebhooks - get project webhooks
+ *
+ * @returns {AWM.Webhook}
+ * */
+AWM.Project.prototype.getWebhook = function(){
+	return this._webhook;
+};
+
+/**
+ * setWebhooks - sets project webooks value
+ *
+ * @param {AWM.Webhook} webhook object
+ * @returns {AWM.Project}
+ * */
+AWM.Project.prototype.setWebhook = function(webhook){
+	this._webhook = webhook;
 	return this;
 };
