@@ -43,6 +43,12 @@
 	};
 
 
+	userService.prototype.logout = function(){
+		this.$cookies.remove(this.config.ACCESS_COOKIE);
+		return this;
+	};
+
+
 	awmApp.service("userService", ['$cookies','config',userService]);
 
 })();
