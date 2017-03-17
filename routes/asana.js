@@ -100,7 +100,7 @@ router.delete('/webhooks/:webhookId',function(req,res){
 	var client = asanaClient(token);
 	client.webhooks.deleteById(webhookId).then(
 		function (response) {
-			return res.status(200).json(response);
+			return res.status(200).json({code:200,data:{},msg:"Done!"});
 		})
 		.catch(function (err) {
 			return res.status(400).json({msg:err});

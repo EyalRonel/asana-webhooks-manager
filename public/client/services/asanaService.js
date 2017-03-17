@@ -65,28 +65,28 @@
 		return deferred.promise;
 	};
 
-	asanaService.prototype.getWebhooks = function(workspaceId){
-
-		if (typeof workspaceId == "undefined") throw new Error("Must provide a workspaceId");
-
-		var deferred = this.$q.defer();
-
-		this.$http.get(this.config.ASANA_API_WEBHOOKS+"/"+workspaceId)
-			.then(
-				//Success
-				function (response) {
-					deferred.resolve(response.data.data);
-				}.bind(this),
-
-				//Failure
-				function (response) {
-					deferred.reject(response);
-				}.bind(this)
-
-			);
-
-		return deferred.promise;
-	};
+	//asanaService.prototype.getWebhooks = function(workspaceId){
+	//
+	//	if (typeof workspaceId == "undefined") throw new Error("Must provide a workspaceId");
+	//
+	//	var deferred = this.$q.defer();
+	//
+	//	this.$http.get(this.config.ASANA_API_WEBHOOKS+"/"+workspaceId)
+	//		.then(
+	//			//Success
+	//			function (response) {
+	//				deferred.resolve(response.data.data);
+	//			}.bind(this),
+	//
+	//			//Failure
+	//			function (response) {
+	//				deferred.reject(response);
+	//			}.bind(this)
+	//
+	//		);
+	//
+	//	return deferred.promise;
+	//};
 
 	asanaService.prototype.subscribe = function(resourceId){
 		if (typeof resourceId == "undefined") throw new Error("Must provide a resourceId");
@@ -112,7 +112,7 @@
 	};
 
 	asanaService.prototype.unsubscribe = function(webhookId){
-		debugger;
+
 		if (typeof webhookId == "undefined") throw new Error("Must provide a webhookId");
 
 		var deferred = this.$q.defer();
