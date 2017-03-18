@@ -13,7 +13,7 @@ router.all('/*',function(req,res,next){
 });
 
 /**
- * GET /me - returns the currently logged in user object
+ * GET /me - returns the currently logged in user
  * */
 router.get('/me',function(req,res) {
 	return asanaCtrl.getUser();
