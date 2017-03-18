@@ -16,24 +16,46 @@ class AsanaController extends AWMController {
 
 	}
 
+	/**
+	 * getUser - returns the currently logged in user object
+	 *
+	 * @returns {Object}
+	 * */
 	getUser(){
 		return this.client.users.me()
 			.then(function (me) { return this.reply(200, me);}.bind(this))
 			.catch(function (err) { return this.reply(400, {}, err);}.bind(this));
 	}
 
+	/**
+	 * getWorkspaces - returns a list of workspaces for the current user
+	 *
+	 * @retruns {Array}
+	 * */
 	getWorkspaces(){
 		return this.client.workspaces.findAll()
 			.then(function (workspaces) { return this.reply(200,workspaces.data); }.bind(this))
 			.catch(function (err) { return this.reply(400,{},err); }.bind(this));
 	}
 
+	/**
+	 * getProjects - returns a list of projects for a given workspace
+	 *
+	 * @param {Integer} workspaceId
+	 * @returns {Array}
+	 * */
 	getProjects(workspaceId){
 		return this.client.projects.findByWorkspace(workspaceId)
 			.then(function(projects){ return this.reply(200,projects.data) }.bind(this))
 			.catch(function (err) { return this.reply(400, {}, err);}.bind(this));
 	}
 
+	/**
+	 * getProjectsWithWebhooks - returns a list of projects for a given workspace along with a webhook object for each project
+	 *
+	 * @param {Integer} workspaceId
+	 * @returns {Array}
+	 * */
 	getProjectsWithWebhooks(workspaceId){
 
 		var retval = [];
@@ -66,18 +88,36 @@ class AsanaController extends AWMController {
 			.catch(function (err) { return this.reply(400, {}, err);}.bind(this));
 	}
 
+	/**
+	 * getWebhooks - returns a list of webhooks for a given workspace
+	 *
+	 * @param {Integer} workspaceId
+	 * @returns {Array}
+	 * */
 	getWebhooks(workspaceId){
 		return this.client.webhooks.getAll(workspaceId)
 			.then(function (webhooks) { return this.reply(200, webhooks.data);}.bind(this))
 			.catch(function (err) { return this.reply(400, {}, err);}.bind(this));
 	}
 
+	/**
+	 * createWebhook - create a webhook for a given resourceId
+	 *
+	 * @param {Integer} resourceId - a project/task id
+	 * @returns {Object}
+	 * */
 	createWebhook(resourceId){
 		return this.client.webhooks.create(resourceId, "https://" + this.request().get('host') + "/events/incoming/"+resourceId)
 			.then(function (response) { return this.reply(200,response); }.bind(this))
 			.catch(function (err) { return this.reply(400,{},err); }.bind(this));
 	}
 
+	/**
+	 * removeWebhook - delete (deregister) an existing webhook
+	 *
+	 * @param {Integer} webhookId
+	 * @returns {Object}
+	 * */
 	removeWebhook(webhookId){
 		return this.client.webhooks.deleteById(webhookId)
 			.then(function (response) {return this.reply(200,response,"Webhook removed!");}.bind(this))
