@@ -89,7 +89,8 @@
 	 * */
 	manageController.prototype.subscribe = function(workspaceId,projectId){
 		this.asanaService.subscribe(projectId)
-			.then(function(webhook){
+			.then(function(response){
+				var webhook = response.data;
 				var webhookObject = new AWM.Webhook()
 					.setId(webhook.id)
 					.setActive(webhook.active)
