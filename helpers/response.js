@@ -1,8 +1,8 @@
 module.exports = function(res,code,data,msg){
-	var r = res.json({
+	var r = res.status(code).json({
 		code:code,
 		data:data,
 		msg:msg
-	}).status(code);
+	});
 	return r;
 };
