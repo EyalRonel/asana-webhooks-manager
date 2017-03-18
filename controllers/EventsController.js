@@ -6,13 +6,17 @@ class EventsController extends AWMController {
 		super(req, res);
 	}
 
+	onIncomingEvents(){
+		if (this.request().get('X-Hook-Secret') != null) return this.handshake();
+		else return this.handle();
+	}
 
 	handshake(){
 
 		//Get X-Hook-Secret form the request object
 		var xHookSecret = this.request().get('X-Hook-Secret');
 		this.response().set('X-Hook-Secret',xHookSecret);
-		return this.response().status(200).json({sts:'ok'});
+		return this.reply(200,{});
 
 	}
 
@@ -20,7 +24,7 @@ class EventsController extends AWMController {
 		console.log('------------');
 		console.log(this.request().body.events);
 		console.log('------------');
-		return this.response().status(200).json({sts:'ok'});
+		return this.reply(200,{});
 	}
 
 
