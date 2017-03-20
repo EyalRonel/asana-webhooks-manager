@@ -5,7 +5,11 @@ const bodyParser = require('body-parser');
 const routes = require('./routes');
 const cookieParser = require('cookie-parser')
 
+const rootRoute = require('./routes/root');
+const asanaRoute = require('./routes/asana');
+const oauthRoute = require('./routes/oauth');
 const tempRoute = require('./routes/temp');
+
 
 var app = express();
 
@@ -19,8 +23,12 @@ app.use(bodyParser.urlencoded({extended: true}));   // to support URL-encoded bo
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 
-tempRoute(app);
-app.use('/',routes);
+routes(app);
+//rootRoute(app);
+//asanaRoute(app);
+//oauthRoute(app);
+//tempRoute(app);
+//app.use('/',routes);
 
 
 
