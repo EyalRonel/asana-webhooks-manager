@@ -2,8 +2,9 @@ const express = require('express');
 const config = require('./config/index');
 //const hbs = require('hbs');
 const bodyParser = require('body-parser');
-//const routes = require('./routes');
+const routes = require('./routes');
 const cookieParser = require('cookie-parser')
+
 const tempRoute = require('./routes/temp');
 
 var app = express();
@@ -17,9 +18,11 @@ app.use(bodyParser.urlencoded({extended: true}));   // to support URL-encoded bo
 
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
-//app.use('/',routes);
 
 tempRoute(app);
+app.use('/',routes);
+
+
 
 
 

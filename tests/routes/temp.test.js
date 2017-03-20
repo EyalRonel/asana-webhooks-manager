@@ -9,26 +9,36 @@ var express = require('express');
 var moduleA = require('../../helpers/moduleA');
 
 describe('GET /temp/x/:param', function () {
-	var app, request, route, xStub;
+	var app,
+			request,
+			route,
+			moduleAfnX,
+			sandbox;
 
 	beforeEach(function () {
+		sandbox = sinon.sandbox.create();
 
-		xStub = sinon.stub(moduleA.prototype,'x');
-		app = express();
-		route = proxyquire('../../routes/temp', {'moduleA':xStub})(app);
-		request = supertest(app);
+		moduleAfnX = sandbox.stub(moduleA.prototype,'x').returns('yyy');
 		
+		app = express();
+		route = proxyquire('../../routes/temp', {'moduleA':moduleAfnX})(app);
+		request = supertest(app);
+
+	});
+
+	afterEach(function(){
+
+		sandbox.restore();
+
 	});
 
 	it('should respond with a 200 and a yyy', function (done) {
-
-		xStub.returns('yyy');
 
 		request
 			.get('/temp/x/test')
 			.expect('Content-Type', /json/)
 			.expect(200, function (err, res) {
-				expect(xStub.calledOnce);
+				expect(moduleAfnX.calledOnce).toBeTruthy();
 				expect(res.body).toEqual({txt:'yyy'});
 				done();
 			});
