@@ -28,7 +28,9 @@
     "expect": "^1.20.2",
     "mocha": "^3.2.0",
     "nock": "^9.0.9",
+    "proxyquire": "^1.7.11",
     "sinon": "^2.0.0",
+    "sinon-bluebird": "^3.1.0",
     "supertest": "^3.0.0"
   }
 }
