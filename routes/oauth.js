@@ -1,6 +1,6 @@
 const express = require('express');
 const asanaClient = require('../helpers/asanaClient');
-
+const oauthController = require('../controllers/oauth');
 
 var registerRoutes = function(app){
 
@@ -13,12 +13,8 @@ var registerRoutes = function(app){
    * */
   router.get('/asana/login',function(req,res){
 
-    const oauthController = require('../controllers/oauth');
     var oauthCtrl =  new oauthController(req,res);
     oauthCtrl.loginWithAsana();
-
-    //Not really needed, used for simplified testing
-    oauthCtrl.reply(200,{});
 
   });
 
@@ -30,14 +26,12 @@ var registerRoutes = function(app){
    * */
   router.get('/asana',function(req,res){
 
-    const oauthController = require('../controllers/oauth');
     var oauthCtrl =  new oauthController(req,res);
 
     var code = req.query.code;
     if (code)
     {
-      oauthCtrl.accessTokenFromCode(code);
-      oauthCtrl.reply(200,{});
+      return oauthCtrl.accessTokenFromCode(code);
     }
     else
     {
