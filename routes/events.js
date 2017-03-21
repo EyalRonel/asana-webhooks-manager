@@ -1,12 +1,10 @@
 const express = require('express');
 const EventsController = require('../controllers/EventsController');
-var   eventsCtrl = null;
+var eventsCtrl = null;
 
 var registerRoutes = function(app){
 
 	var router = express.Router();
-
-	app.use('/', router);
 
 	router.all('/*',function(req,res,next){
 
@@ -23,6 +21,8 @@ var registerRoutes = function(app){
 		return eventsCtrl.onIncomingEvents();
 
 	});
+
+	app.use('/events', router);
 
 };
 
