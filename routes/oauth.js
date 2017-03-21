@@ -14,7 +14,11 @@ var registerRoutes = function(app){
   router.get('/asana/login',function(req,res){
 
     const oauthController = require('../controllers/oauth');
-    var oauthCtrl =  new oauthController(req,res).loginWithAsana();
+    var oauthCtrl =  new oauthController(req,res);
+    oauthCtrl.loginWithAsana();
+
+    //Not really needed, used for simplified testing
+    oauthCtrl.reply(200,{});
 
   });
 
@@ -33,6 +37,7 @@ var registerRoutes = function(app){
     if (code)
     {
       oauthCtrl.accessTokenFromCode(code);
+      oauthCtrl.reply(200,{});
     }
     else
     {
