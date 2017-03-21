@@ -1,7 +1,7 @@
 {
-  "name": "dometrix-api-server",
+  "name": "asana-webhooks-manager",
   "version": "1.0.0",
-  "description": "DoMetrix RESTful API Server",
+  "description": "Asana Webhooks Manager - Easily manage Asana webhooks and receive event payloads",
   "main": "app.js",
   "scripts": {
     "test": "mocha tests/**/*.test.js",
@@ -9,19 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://eyalronel@bitbucket.org/dometrix/dometrix-api-server.git"
+    "url": "https://github.com/EyalRonel/asana-webhooks-manager.git"
   },
   "author": "Eyal Ronel @DoMetrix",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/dometrix/dometrix-api-server#readme",
+  "homepage": "https://github.com/EyalRonel/asana-webhooks-manager#readme",
   "dependencies": {
     "asana": "^0.15.0",
     "body-parser": "^1.17.1",
     "change-case": "^3.0.1",
     "cookie-parser": "^1.4.3",
-    "elasticsearch": "^12.1.3",
     "express": "^4.14.1",
-    "hbs": "^4.0.1",
     "require-dir": "^0.3.1"
   },
   "devDependencies": {
@@ -30,7 +28,6 @@
     "nock": "^9.0.9",
     "proxyquire": "^1.7.11",
     "sinon": "^2.0.0",
-    "sinon-bluebird": "^3.1.0",
     "supertest": "^3.0.0"
   }
 }
