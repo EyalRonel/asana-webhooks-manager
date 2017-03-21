@@ -1,21 +1,31 @@
-const router = require('express').Router();
+const express = require('express');
 const EventsController = require('../controllers/EventsController');
 var   eventsCtrl = null;
 
-router.all('/*',function(req,res,next){
+var registerRoutes = function(app){
 
-	eventsCtrl = new EventsController(req,res);
+	var router = express.Router();
 
-	if (eventsCtrl instanceof EventsController) {
-		next();
-	}
+	app.use('/', router);
 
-});
+	router.all('/*',function(req,res,next){
 
-router.post('/incoming/:resourceId',function(req,res,next){
+		eventsCtrl = new EventsController(req,res);
 
-	return eventsCtrl.onIncomingEvents();
+		if (eventsCtrl instanceof EventsController) {
+			next();
+		}
 
-});
+	});
 
-module.exports = router;
+	router.post('/incoming/:resourceId',function(req,res,next){
+
+		return eventsCtrl.onIncomingEvents();
+
+	});
+
+};
+
+
+
+module.exports = registerRoutes;

@@ -1,75 +1,85 @@
-const router      = require('express').Router()
+const express = require('express');
 const asanaController = require('../controllers/AsanaController');
 var   asanaCtrl = null;
 
-router.all('/*',function(req,res,next){
+var registerRoutes = function(app){
 
-	asanaCtrl = new asanaController(req,res);
+	var router = express.Router();
 
-	if (asanaCtrl instanceof asanaController) {
-		next();
-	}
+	router.all('/*',function(req,res,next){
 
-});
+		asanaCtrl = new asanaController(req,res);
 
-/**
- * GET /me - returns the currently logged in user
- * */
-router.get('/me',function(req,res) {
-	return asanaCtrl.getUser();
-});
+		if (asanaCtrl instanceof asanaController) {
+			next();
+		}
 
-/**
- * GET /workspaces - returns a list of workspaces
- * */
-router.get('/workspaces',function(req,res) {
-	return asanaCtrl.getWorkspaces();
-});
+	});
 
-/**
- * GET /webhooks/<workspaceId> - Returns a list of all available webhooks for a workspace
- * */
-router.get('/webhooks/:workspaceId',function(req,res) {
+	/**
+	 * GET /me - returns the currently logged in user
+	 * */
+	router.get('/me',function(req,res) {
+		return asanaCtrl.getUser();
+	});
 
-	if (!req.params.workspaceId) return response(res,400,{},"Missing workspaceId");
+	/**
+	 * GET /workspaces - returns a list of workspaces
+	 * */
+	router.get('/workspaces',function(req,res) {
+		return asanaCtrl.getWorkspaces();
+	});
 
-	asanaCtrl.getWebhooks(req.params.workspaceId)
+	/**
+	 * GET /webhooks/<workspaceId> - Returns a list of all available webhooks for a workspace
+	 * */
+	router.get('/webhooks/:workspaceId',function(req,res) {
 
-});
+		if (!req.params.workspaceId) return response(res,400,{},"Missing workspaceId");
 
-/**
- * POST /webhoooks/<resourceId> - creates a webhook for a specific resource
- * */
-router.post('/webhooks/:resourceId',function(req,res) {
+		asanaCtrl.getWebhooks(req.params.workspaceId)
 
-	if (!req.params.resourceId) return response(res, 400, {}, "Missing resourceId");
+	});
 
-	return asanaCtrl.createWebhook(req.params.resourceId);
+	/**
+	 * POST /webhoooks/<resourceId> - creates a webhook for a specific resource
+	 * */
+	router.post('/webhooks/:resourceId',function(req,res) {
 
+		if (!req.params.resourceId) return response(res, 400, {}, "Missing resourceId");
 
-});
-
-/**
- * DELETE /webhooks/<webhookId> - removes a webhook by it's Id
- * */
-router.delete('/webhooks/:webhookId',function(req,res){
-
-	if (!req.params.webhookId) return response(res, 400, {}, "Missing webhookId");
-
-	return asanaCtrl.removeWebhook(req.params.webhookId);
+		return asanaCtrl.createWebhook(req.params.resourceId);
 
 
-});
+	});
 
-/**
- * GET /projects - returns a list of projects for a given workspaceId and their webhookIds if available
- * */
-router.get('/projects/:workspaceId',function(req,res) {
+	/**
+	 * DELETE /webhooks/<webhookId> - removes a webhook by it's Id
+	 * */
+	router.delete('/webhooks/:webhookId',function(req,res){
 
-	if (!req.params.workspaceId) return response(res,400,{},"Missing workspaceId");
+		if (!req.params.webhookId) return response(res, 400, {}, "Missing webhookId");
 
-	return asanaCtrl.getProjectsWithWebhooks(req.params.workspaceId);
+		return asanaCtrl.removeWebhook(req.params.webhookId);
 
-});
 
-module.exports = router;
+	});
+
+	/**
+	 * GET /projects - returns a list of projects for a given workspaceId and their webhookIds if available
+	 * */
+	router.get('/projects/:workspaceId',function(req,res) {
+
+		if (!req.params.workspaceId) return response(res,400,{},"Missing workspaceId");
+
+		return asanaCtrl.getProjectsWithWebhooks(req.params.workspaceId);
+
+	});
+
+	app.use('/asana', router);
+
+};
+
+
+
+module.exports = registerRoutes;
