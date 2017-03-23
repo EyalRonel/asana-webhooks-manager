@@ -1,5 +1,5 @@
 .btn-primary-asana,.btn-primary-asana:visited {background-color:#6a67ce; color:#fff; }
-.btn-primary-asana:hover {color:#a177ff;box-shadow:0 0 0 3px #d0bbff; color:#fff;}
+.btn-primary-asana:hover,.btn-primary-asana:active {color:#a177ff;box-shadow:0 0 0 3px #d0bbff; color:#fff;}
 
 .btn-info-asana,.btn-info-asana:visited {background-color:#1aafd0; color:#fff; }
 .btn-info-asana:hover {color:#a177ff;box-shadow:0 0 0 3px rgba(26,175,208,0.3); color:#fff;}
@@ -12,3 +12,9 @@
     padding-top: 50px;
     padding-bottom: 60px;
 }
+
+/**
+    Manage webhooks
+*/
+.table-manage-webhooks tbody tr {cursor: pointer;}
+.table-manage-webhooks tbody tr td { line-height: 2 !important; }

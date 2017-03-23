@@ -9,23 +9,19 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table class="table">
+                    <table class="table table-hover table-manage-webhooks">
                         <thead>
                         <tr>
                             <th>#</th>
                             <th>Workspace</th>
-                            <th>Webhooks</th>
-                            <th>Alerts</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat-start="workspace in manageCtrl.workspaces track by $index">
+                        <tr ng-repeat-start="workspace in manageCtrl.workspaces track by $index" ng-click="manageCtrl.getProjects($index)">
                             <td scope="row">{{$index+1}}</td>
                             <td>{{workspace.getName()}}</td>
-                            <td><span class="label label-info">32</span> Projects <span class="label label-success">15</span> Tasks</td>
-                            <td><span class="label label-warning">2</span> Notices</td>
-                            <td><button class="btn btn-default btn-sm" type="button" ng-click="manageCtrl.getProjects($index)">View</button></td>
+                            <td class="text-right"><button class="btn btn-primary-asana btn-sm" type="button">View projects</button></td>
                         </tr>
                         <tr ng-show="workspace.getProjects().length > 0">
                             <td colspan="5">
