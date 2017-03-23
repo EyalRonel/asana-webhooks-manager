@@ -7,10 +7,6 @@ class RootController extends AWMController{
 
 	}
 
-	test() {
-		return this.response(200,{},"BYE");
-	}
-
 }
 
 module.exports = RootController;
