@@ -18,33 +18,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat-start="workspace in manageCtrl.workspaces track by $index" ng-click="manageCtrl.getProjects($index)">
+                        <tr ng-repeat-start="workspace in manageCtrl.workspaces track by $index" ng-click="manageCtrl.getProjects($index); manageCtrl.viewedWorkspaceIndex = $index;">
                             <td scope="row">{{$index+1}}</td>
                             <td>{{workspace.getName()}}</td>
-                            <td class="text-right"><button class="btn btn-primary-asana btn-sm" type="button">View projects</button></td>
-                        </tr>
-                        <tr ng-show="workspace.getProjects().length > 0">
-                            <td colspan="5">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Project name</th>
-                                        <th>Subscription</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="project in workspace.getProjects() track by $index">
-                                            <td scope="row">{{$index+1}}</td>
-                                            <td>{{project.getName()}}</td>
-                                            <td>
-                                                <button type = "button" class = "btn btn-success" ng-click="manageCtrl.subscribe(workspace.getId(),project.getId())" ng-if="project.getWebhook() == null">Subscribe</button>
-                                                <button type = "button" class = "btn btn-success" ng-click="manageCtrl.unsubscribe(workspace.getId(),project.getId(),project.getWebhook().getId())" ng-if="project.getWebhook() != nul">Unsubscribe</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
+                            <td class="text-right"><button class="btn btn-primary-asana btn-sm" type="button" data-toggle="modal" data-target=".projects-modal">View projects</button></td>
                         </tr>
                         <tr ng-repeat-end></tr>
 
@@ -52,10 +29,38 @@
                     </table>
                 </div>
             </div>
-
-
-
         </div>
+    </div>
 
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="modal fade projects-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-md" role="document">
+                    <div class="modal-content">
+                        <table class="table table-hover table-manage-webhooks">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-left">Project</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="project in manageCtrl.workspaces[manageCtrl.viewedWorkspaceIndex].getProjects() track by $index">
+
+                                    <td scope="row" class="text-center">{{$index+1}}</td>
+                                    <td>{{project.getName()}}</td>
+                                    <td class="text-right">
+                                        <button type = "button" class = "btn btn-primary-asana" ng-click="manageCtrl.subscribe(manageCtrl.workspaces[manageCtrl.viewedWorkspaceIndex].getId(),project.getId())" ng-if="project.getWebhook() == null">Subscribe</button>
+                                        <button type = "button" class = "btn btn-info-asana" ng-click="manageCtrl.unsubscribe(manageCtrl.workspaces[manageCtrl.viewedWorkspaceIndex].getId(),project.getId(),project.getWebhook().getId())" ng-if="project.getWebhook() != nul">Unsubscribe</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

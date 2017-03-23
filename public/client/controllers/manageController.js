@@ -8,7 +8,15 @@
 		this.asanaService = asanaService;
 		this.navigationService = navigationService;
 
+		/**
+		 * workspaces - Reference to workspaces array in the AWM.User object
+		 * */
 		this.workspaces = [];
+
+		/**
+		 * viewedWorkspaceIndex - Hold the last selected workspace position (index) within the workspaces array
+		 * */
+		this.viewedWorkspaceIndex = null;
 
 		this.init();
 
@@ -48,8 +56,13 @@
 	 * */
 	manageController.prototype.getProjects = function(workspaceIndex){
 
+		//Set the selected workspace as 'currently viewed', to determine what projects to display in the projects modal
+		this.viewedWorkspaceIndex = workspaceIndex;
+
+		//Retrieve workspace Id
 		var workspaceId = this.userService.getUser().getWorkspaces()[workspaceIndex].getId();
 
+		//Fetch projects workspaces
 		this.asanaService.getProjects(workspaceId).then(
 			function(projects){
 				var AWMProjectsArray = [];
