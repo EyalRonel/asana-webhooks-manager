@@ -1,16 +1,12 @@
-const config = require('../config/asana');
+const asanaConfig = require('../helpers/configHelper');
 const asana = require('asana');
-
-var clientId      = config.clientId == null ? process.env['asana_client_id'] : config.clientId;
-var clientSecret  = config.clientSecret == null ? process.env['asana_client_secret'] : config.clientSecret;
-var redirectUri   = config.redirectUri == null ? process.env['asana_redirect_uri'] : config.redirectUri;
 
 var client = function(token){
 
 	var client = asana.Client.create({
-		clientId:     clientId,
-		clientSecret: clientSecret,
-		redirectUri:  redirectUri
+		clientId:     asanaConfig.getClientId(),
+		clientSecret: asanaConfig.getClientSecret(),
+		redirectUri:  asanaConfig.getRediectUri()
 	});
 
 	if (token) client.useOauth({credentials: token});

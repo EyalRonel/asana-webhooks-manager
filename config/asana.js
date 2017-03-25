@@ -11,5 +11,5 @@
 module.exports = {
     clientId: null,
     clientSecret: null,
-    redirectUri: null
+    redirectUri: null,
 };
