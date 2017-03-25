@@ -39,7 +39,7 @@ describe('Config helper',function(){
 		expect(configHelper.getClientSecret()).toBe(fakeConfig.clientSecret);
 	});
 
-	it('Return a re',function(){
+	it('Return a redirect uri',function(){
 		expect(configHelper.getRediectUri()).toBe(fakeConfig.redirectUri);
 	});
 
