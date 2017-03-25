@@ -12,7 +12,7 @@ var fakeConfig={
 };
 
 /**
- * Module under test
+ * Module under test, with stubs
  * */
 const configHelper = proxyquire('../../helpers/configHelper', {'../config/asana':fakeConfig}
 );
@@ -31,15 +31,15 @@ describe('Config helper',function(){
 
 	});
 
-	it('Return a client id',function(){
+	it('Should return a client id',function(){
 		expect(configHelper.getClientId()).toBe(fakeConfig.clientId);
 	});
 
-	it('Return a client secret',function(){
+	it('Should return a client secret',function(){
 		expect(configHelper.getClientSecret()).toBe(fakeConfig.clientSecret);
 	});
 
-	it('Return a redirect uri',function(){
+	it('Should return a redirect uri',function(){
 		expect(configHelper.getRediectUri()).toBe(fakeConfig.redirectUri);
 	});
 
