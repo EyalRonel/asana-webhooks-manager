@@ -2,7 +2,7 @@
   "name": "asana-webhooks-manager",
   "version": "1.0.0",
   "description": "Asana Webhooks Manager - Easily manage Asana webhooks and receive event payloads",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha tests/**/*.test.js",
     "test-watch": "nodemon --exec \"npm test\""
