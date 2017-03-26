@@ -161,6 +161,10 @@ describe('Asana Controller', function () {
 
 	});
 
+	/**
+	 * While other methods under test simply call the Asana client, this following test needs to actually validate the logic
+	 * of the method under test, rather than just make sure it was called.
+	 * */
 	it('Should return a unified list of projects and their webhooks for a given workspace id',function(done){
 
 		var asanaClientStub = sandbox.spy(
