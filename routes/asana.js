@@ -1,5 +1,6 @@
 const express = require('express');
-const asanaController = require('../controllers/AsanaController');
+const AsanaController = require('../controllers/asanaController');
+
 var   asanaCtrl = null;
 
 var registerRoutes = function(app){
@@ -8,9 +9,9 @@ var registerRoutes = function(app){
 
 	router.all('/*',function(req,res,next){
 
-		asanaCtrl = new asanaController(req,res);
+		asanaCtrl = new AsanaController(req,res);
 
-		if (asanaCtrl instanceof asanaController) {
+		if (asanaCtrl instanceof AsanaController) {
 			next();
 		}
 
@@ -28,6 +29,8 @@ var registerRoutes = function(app){
 	 * */
 	router.get('/workspaces',function(req,res) {
 		return asanaCtrl.getWorkspaces();
+
+
 	});
 
 	/**
