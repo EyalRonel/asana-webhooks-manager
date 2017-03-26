@@ -1,16 +1,33 @@
 const express = require('express');
-const path    = require("path");
+const RootController = require('../controllers/RootController');
+var   rootCtrl = null;
 
 var registerRoutes = function(app){
 
 	var router = express.Router();
 
-	app.use('/', router);
+	router.all('/*',function(req,res,next){
 
-	router.get('/',function(req,res){
-		res.sendFile(path.join(__dirname,'../public/client/views','index.html'));
+		rootCtrl = new RootController(req,res);
+
+		if (rootCtrl instanceof RootController) {
+			next();
+		}
+
 	});
 
+	/**
+	 * / - Main entry point URL
+	 *
+	 * @returns Static client files (Angular App)
+	 * */
+	router.get('/',function(req,res){
+
+		return rootCtrl.getApp();
+
+	});
+
+	app.use('/', router);
 };
 
 
