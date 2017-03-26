@@ -50,6 +50,9 @@
 
 </head>
 <body ng-app="awmApp">
-    <ui-view>Loading!!!!</ui-view>
+    <ui-view>
+        <!--Server side rendering, will be replaced once angular replaces the DOM-->
+        <div class="loader"></div>
+    </ui-view>
 </body>
 </html>
