@@ -108,8 +108,8 @@ class AsanaController extends AWMController {
 	 * */
 	createWebhook(resourceId){
 		return this.client.webhooks.create(resourceId, "https://" + this.request().get('host') + "/events/incoming/"+resourceId)
-			.then(function (response) { console.log(response); return this.reply(200,response); }.bind(this))
-			.catch(function (err) { console.log(err); return this.reply(400,{},err); }.bind(this));
+			.then(function (response) { return this.reply(200,response); }.bind(this))
+			.catch(function (err) { return this.reply(400,{},err); }.bind(this));
 	}
 
 	/**
