@@ -8,6 +8,7 @@ class RootController extends AWMController{
 	}
 
 	getApp(){
+		console.log(path.join(__dirname,'../public/client/views','index.html'));
 		return this._response.sendFile(path.join(__dirname,'../public/client/views','index.html'));}
 	}
 

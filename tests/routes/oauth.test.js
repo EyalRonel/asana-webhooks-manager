@@ -4,7 +4,7 @@ var supertest = require('supertest');
 var expect = require('expect');
 var express = require('express');
 
-const oauthController = require('../../controllers/oauth');
+const oauthController = require('../../controllers/OauthController');
 
 describe('OAuth route', function () {
 

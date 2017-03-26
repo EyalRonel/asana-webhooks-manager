@@ -1,6 +1,6 @@
 const express = require('express');
 const asanaClient = require('../helpers/asanaClient');
-const oauthController = require('../controllers/oauth');
+const oauthController = require('../controllers/OauthController');
 
 var registerRoutes = function(app){
 

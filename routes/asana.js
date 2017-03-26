@@ -1,5 +1,5 @@
 const express = require('express');
-const AsanaController = require('../controllers/asanaController');
+const AsanaController = require('../controllers/AsanaController');
 
 var   asanaCtrl = null;
 

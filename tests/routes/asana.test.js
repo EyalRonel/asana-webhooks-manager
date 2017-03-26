@@ -1,12 +1,11 @@
 var proxyquire = require('proxyquire');
 var sinon = require('sinon');
-//var sinonStubPromise = require('sinon-stub-promise')(sinon);
 var supertest = require('supertest');
 var expect = require('expect');
 var express = require('express');
 var cookieParser = require('cookie-parser')
 
-var AsanaController = require('../../controllers/asanaController');
+var AsanaController = require('../../controllers/AsanaController');
 
 describe('Asana route', function () {
 
