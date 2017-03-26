@@ -3,36 +3,16 @@ var sinon = require('sinon');
 var supertest = require('supertest');
 var expect = require('expect');
 
+var mockResponse = require('../mocks/Response');
+var mockRequest = require('../mocks/Request');
+
 var AWMController = require('../../controllers/AWMController');
 
 describe('AWM Controller', function () {
 
-	var AWMCtrl,
-		mockRequest,
-		mockResponse;
+	var AWMCtrl;
 
 	before(function(){
-
-		mockRequest = sinon.stub().returns(
-			{
-				header:'fakeHeader'
-			}
-		);
-
-		mockResponse = {
-				_status:null,
-				_json:null,
-				status:function(code){
-					this._status = code;
-					return this;
-				},
-				json:function(hash){
-					this._json = hash;
-					return this;
-				}
-			};
-
-
 		AWMCtrl = new AWMController(mockRequest,mockResponse);
 	});
 

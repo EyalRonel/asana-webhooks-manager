@@ -3,52 +3,19 @@ var sinon = require('sinon');
 var supertest = require('supertest');
 var expect = require('expect');
 
+var mockResponse = require('../mocks/Response');
+var mockRequest = require('../mocks/Request');
+
 var asanaClient = require('../../helpers/asanaClient');
+
 
 describe('OAuth Controller', function () {
 
-	var OAuthCtrl,
-		mockRequest,
-		mockResponse;
+	var OAuthCtrl;
 
-	beforeEach(function(){
-		
-		mockRequest = sinon.stub().returns(
-			{
-				header:'fakeHeader'
-			}
-		);
+	beforeEach(function(){});
 
-		mockResponse = {
-
-			_status:null,
-			_json:null,
-			_redirectUrl:null,
-			_cookies:{},
-
-			status:function(code){
-				this._status = code;
-				return this;
-			},
-			json:function(hash){
-				this._json = hash;
-				return this;
-			},
-			redirect:function(redirectUrl){
-				this._redirectUrl = redirectUrl;
-				return this;
-			},
-			cookie:function(key,val,options){
-				this._cookies[key] =  val;
-				return this;
-			}
-		};
-
-	});
-
-	afterEach(function(){
-
-	});
+	afterEach(function(){});
 
 	it('Should redirect to asana Authorize Url',function(done){
 
