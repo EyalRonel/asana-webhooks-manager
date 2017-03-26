@@ -169,20 +169,39 @@ describe('Asana Controller', function () {
 					projects: {
 						findByWorkspace:function(workspaceId){
 							return new Promise(function(resolve,reject){
-								setTimeout(function(){resolve({data:[]});},0);
+								setTimeout(function(){resolve({data:
+									[ { id: 151039081770111, name: 'Project 1' },
+										{ id: 151039081770211, name: 'Project 2' },
+										{ id: 155905521796311, name: 'Project 3' }
+									]
+								});},0);
 							});
 						}
 					},
 					webhooks: {
 						getAll:function(workspaceId){
 							return new Promise(function(resolve,reject){
-								setTimeout(function(){resolve({data:[]});},0);
+								setTimeout(function(){resolve({data:
+									[
+										{
+											"id":123456789101,
+											"target":"https://my.fake.host/events/incoming/155905521796311",
+											"active":true,
+											"resource":{
+												"id":155905521796311,
+												"name":"Project 3"
+											}
+										}
+									]
+								});},0);
 							});
 						}
 					}
 				}
 			}
 		);
+
+
 
 		var AsanaController = proxyquire('../../controllers/AsanaController',{'../helpers/asanaClient':asanaClientStub});
 
@@ -192,7 +211,22 @@ describe('Asana Controller', function () {
 		AsanaCtrl.getProjectsWithWebhooks("12345678")
 			.then(function(response){
 				expect(asanaClientStub.calledOnce).toBeTruthy();
-				expect(AsanaCtrl.response()._json).toEqual({ code: 200, data: [], msg: 'OK' });
+				expect(AsanaCtrl.response()._json).toEqual(
+					{ code: 200,
+						data: [
+							{id: 151039081770111, name: "Project 1", webhook: null},
+							{id: 151039081770211, name: "Project 2", webhook: null},
+							{"id":155905521796311, "name":"Project 3", "webhook":{
+									"id":123456789101,
+									"target":"https://my.fake.host/events/incoming/155905521796311",
+									"active":true,
+									"resource":{"id":155905521796311, "name":"Project 3"}
+								}
+							}
+						],
+						msg: 'OK'
+					}
+				);
 				done();
 			})
 			.catch(function(err){
