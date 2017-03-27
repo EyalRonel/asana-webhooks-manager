@@ -20,7 +20,8 @@
     "change-case": "^3.0.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
-    "require-dir": "^0.3.1"
+    "require-dir": "^0.3.1",
+    "socket.io": "^1.7.3"
   },
   "devDependencies": {
     "expect": "^1.20.2",
