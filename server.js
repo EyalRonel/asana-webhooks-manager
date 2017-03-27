@@ -20,8 +20,6 @@ if(!module.parent){
 	//New incoming websocket connection
 	io.on('connection', function(socket){
 
-		socket.emit('event', 'can you hear me?', 1, 2, 'abc');
-
 		//Register diconnect callback
 		socket.on('disconnect', function() {
 			socket.disconnect();
