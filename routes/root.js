@@ -2,7 +2,7 @@ const express = require('express');
 const RootController = require('../controllers/RootController');
 var   rootCtrl = null;
 
-var registerRoutes = function(app){
+var registerRoutes = function(app,io){
 
 	var router = express.Router();
 

@@ -2,7 +2,7 @@ const express = require('express');
 const asanaClient = require('../helpers/asanaClient');
 const oauthController = require('../controllers/OauthController');
 
-var registerRoutes = function(app){
+var registerRoutes = function(app,io){
 
   var router = express.Router();
 
