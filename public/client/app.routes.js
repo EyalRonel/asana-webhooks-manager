@@ -41,6 +41,17 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 				}
 			}
 		})
+		.state('events', {
+			parent:'root',
+			url: '/events',
+			views: {
+				'body':{
+					templateUrl: '/client/views/events.html',
+					controller: 'eventsController',
+					controllerAs: 'eventsCtrl'
+				}
+			}
+		})
 		.state('docs', {
 			parent:'root',
 			url: '/docs',

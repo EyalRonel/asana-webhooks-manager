@@ -8,17 +8,26 @@
 			{
 				title: "Home",
 				state: "root",
-				active: true
+				active: true,
+				auth: false
 			},
 			{
 				title: "Manage",
 				state: "manage",
-				active: false
+				active: false,
+				auth: true
+			},
+			{
+				title: "Live view",
+				state: "events",
+				active: false,
+				auth: false
 			},
 			{
 				title: "Docs",
 				state: "docs",
-				active: false
+				active: false,
+				auth: false
 			}
 		];
 

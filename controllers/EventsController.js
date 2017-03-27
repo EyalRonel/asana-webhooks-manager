@@ -2,8 +2,11 @@ const AWMController = require('./AWMController');
 
 class EventsController extends AWMController {
 
-	constructor(req, res) {
+	constructor(req, res,io) {
 		super(req, res);
+
+		this.socket = io;
+
 	}
 
 	onIncomingEvents(){
@@ -24,6 +27,8 @@ class EventsController extends AWMController {
 		console.log('------------');
 		console.log(this.request().body.events);
 		console.log('------------');
+		this.socket.emit('events', this.request().body.events);
+
 		return this.reply(200,{});
 	}
 

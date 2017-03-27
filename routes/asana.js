@@ -3,7 +3,7 @@ const AsanaController = require('../controllers/AsanaController');
 
 var   asanaCtrl = null;
 
-var registerRoutes = function(app){
+var registerRoutes = function(app,io){
 
 	var router = express.Router();
 
