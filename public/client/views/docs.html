@@ -1,1 +1,175 @@
-Docs...
+<div class="container-fluid">
+    <div class="row awm-section">
+
+        <div class="col-sm-3 col-xs-12">
+            <ul class="awm-sidebar">
+
+                <li class="">
+                    <a href="#">Setup <span class="label label-danger">mandatory</span></a>
+                    <ul>
+                        <li><a href="">Creating an Asana App</a></li>
+                        <li><a href="">Updating configuration</a></li>
+                        <li><a href="">HTTPS support</a></li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="#">Using AWM</a>
+                    <ul>
+                        <li><a href="">Starting the server</a></li>
+                        <li><a href="">Logging in</a></li>
+                        <li><a href="">Managing webhooks</a></li>
+                        <li><a href="">Viewing events (real-time)</a></li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="#">Deployment</a>
+                    <ul>
+                        <li><a href="">Security considerations</a></li>
+                        <li><a href="">Webhook target URI</a></li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="#">Extending AWM</a>
+                    <ul>
+                        <li><a href="">Introduction</a></li>
+                        <li><a href="">Intercepting incoming events</a></li>
+                        <li><a href="">Client-side views</a></li>
+                        <li><a href="">Exposing additional APIs</a></li>
+                        <li><a href="">Real-time communication</a></li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </div>
+
+        <div class="col-sm-9 col-xs-12">
+            <h1>Documentation</h1>
+            <p>
+                No one likes reading the docs :) so why not watch a quick-start video instead and get up and running in no-time!<br/>
+                If you're interested in going beyond the basics, like extending AWM functionality read on.
+            </p>
+
+            <h2>Setup</h2>
+                <div class="alert alert-info" role="alert">
+                    <strong>Secure Redirect URI</strong> Asana requires that apps using the OAuth authentication flow use an HTTPS Redirect URI.<br/>
+                    For local development use, it's easy (and free) by using tools like <a href="https://ngrok.com/" target="_blank">ngork</a> or <a href="https://localtunnel.github.io/www/" target="_blank">LocalTunnel</a><br/>
+                    * Please note I am not affiliated with any of the above, and consider this as a suggestion only :)
+
+                </div>
+                <h3>Creating an Asana App</h3>
+                <p>
+                    1. Login into to your Asana account and Select <b>My Profile Settings...</b> for the top right user menu<br/>
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step1.jpg">
+                </p>
+                <p>
+                    2. Select the <b>Apps</b> tab from the top menu
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step2.jpg">
+                </p>
+                <p>
+                    3. Select <b>Manage Developer Apps</b>
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step3.jpg">
+                </p>
+                <p>
+                    4. Click on <b>+Add New Application</b>
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step4.jpg">
+                </p>
+                <p>
+                    5. Fill in all three fields, and mark the "agreement" checkbox then click <b>Create</b><br/>
+                    The redirect url value must be your own server root address, appended with <b>"/oauth/asana"</b>
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step5.jpg">
+                </p>
+                <p>
+                    6. Congrats! you've just created an Asana Application.  Before clicking <b>Save</b>, copy all values underlined below, You'll need to paste them into <a href="">AWM Configuration File</a> before you can start using AWM<br/>
+
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step6.jpg">
+                </p>
+
+                <h3>Updating configuration</h3>
+                <p>
+                    AWM uses Asana's OAuth flow to allow you to "login with Asana".<br/>
+                    Using your text editor of choice, please update the configuration file with located at <b><"your awm directory">/config/asana.js</b><br/>
+                    Following the values from screenshots above, your modified configuration file should look very similar to this:
+                    <pre><code code-highlight>
+module.exports = {
+    clientId: "304364573959829",
+    clientSecret: "392ab438bf979973d0cc12a0ed6da8b0",
+    redirectUri: "https://a2bd603f.ngrok.io/oauth/asana",
+};
+                    </code></pre>
+                </p>
+
+                <h3>HTTPS support</h3>
+                <p>
+                    The following example uses ngrok.
+                    Download it <a href="https://ngrok.com/download" target="_blank">here</a>, then open up your terminal and run <b>"ngrok http 3000"</b>.<br/>
+                    If you're seeing this, it means things are working OK, and that whatever is running at localhost:3000 is not available both via http and https to the world.
+                    Before you try accessing yout https endpoint, please read one more step below to <a href="">start your AWM server</a>
+                    <pre><code code-highlight>
+Tunnel Status                 online
+Version                       2.0/2.0
+Web Interface                 http://127.0.0.1:4040
+Forwarding                    http://a2bd603f.ngrok.io -> localhost:3000
+Forwarding                    https://a2bd603f.ngrok.io -> localhost:3000
+
+Connnections                  ttl     opn     rt1     rt5     p50     p90
+0       0       0.00    0.00    0.00    0.00
+                    </code></pre>
+                </p>
+                <p>
+                    More documentation is available on the ngork website: <a href="https://ngrok.com/docs">https://ngrok.com/docs</a>
+                </p>
+
+            <h2>Using AWM</h2>
+                <h3>Starting the server</h3>
+                <p>
+                    AWM requires NodeJS (v6.9 or higher) to run. You can download it from <a href="https://nodejs.org/en/download" target="_blank">Node's official website</a>
+                    Once you have node install, using another terminal session (to keep ngrok running) cd to your AWM folder and run <b>"node server.js"</b>. You should see an "AWM Server started!" message:
+                    <pre><code code-highlight>
+> node server.js
+AWM Server started!
+                    </code></pre>
+
+                    You should now be able to access the web interface for AWM, available at your <b>https url as shown on screen in your terminal running the ngrok tunnel</b>.
+
+                </p>
+
+                <h3>Logging in</h3>
+                <p></p>
+
+                <h3>Managing webhooks</h3>
+                <p></p>
+
+                <h3>Viewing events (real-time)</h3>
+                <p></p>
+
+            <h2>Deployment</h2>
+                <h3>Security considerations</h3>
+                <p></p>
+
+                <h3>Webhook target URI</h3>
+                <p></p>
+
+            <h2>Extending AWM</h2>
+                <h3>Introduction</h3>
+                <p></p>
+
+                <h3>Intercepting incoming events</h3>
+                <p></p>
+
+                <h3>Client-side views</h3>
+                <p></p>
+
+                <h3>Exposing additional APIs</h3>
+                <p></p>
+
+                <h3>Real-time communication</h3>
+                <p></p>
+
+        </div>
+    </div>
+
+</div>

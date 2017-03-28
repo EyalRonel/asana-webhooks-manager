@@ -13,6 +13,12 @@
     padding-bottom: 60px;
 }
 
+.awm-sidebar { list-style: none; margin-top:65px; }
+.awm-sidebar li { padding: 3px 0px; margin-top: 10px;  }
+.awm-sidebar li ul { padding-left: 10px;}
+.awm-sidebar li ul li { list-style:none; padding: 3px 0px; margin:0px }
+
+img.awm-img-full-width {width:100%; height:auto;}
 /**
     Manage webhooks
 */
