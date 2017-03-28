@@ -1,8 +1,6 @@
 (function(){
 	var mainController = function($rootScope, $scope, navigationService, userService,asanaService){
 
-		console.log('main');
-
 		this.$rootScope = $rootScope;
 		this.$scope = $scope;
 		this.userService = userService;
