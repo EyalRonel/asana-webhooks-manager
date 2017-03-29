@@ -1,1 +1,221 @@
-Docs...
+<div class="container-fluid">
+    <div class="row awm-section">
+
+        <div class="col-sm-3 col-xs-12">
+            <ul class="awm-sidebar">
+
+                <li class="">
+                    <a ng-click="docsCtrl.scrollTo('setup')">Setup</a> <span class="label label-danger">mandatory</span>
+                    <ul>
+                        <li><a ng-click="docsCtrl.scrollTo('createApp')">Creating an Asana App</a></li>
+                        <li><a ng-click="docsCtrl.scrollTo('updateConfig')">Updating configuration</a></li>
+                        <li><a ng-click="docsCtrl.scrollTo('httpsSupport')">HTTPS support</a></li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a ng-click="docsCtrl.scrollTo('usingAwm')">Using AWM</a>
+                    <ul>
+                        <li><a ng-click="docsCtrl.scrollTo('startServer')">Starting the server</a></li>
+                        <li><a ng-click="docsCtrl.scrollTo('logginIn')">Logging in</a></li>
+                        <li><a ng-click="docsCtrl.scrollTo('manageWebhook')">Managing webhooks</a></li>
+                        <li><a ng-click="docsCtrl.scrollTo('viewEvents')">Viewing events (real-time)</a></li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a ng-click="docsCtrl.scrollTo('deployment')">Deployment</a>
+                    <ul>
+                        <li><a ng-click="docsCtrl.scrollTo('security')">Security considerations</a></li>
+                        <li><a ng-click="docsCtrl.scrollTo('targetUri')">Webhook target URI</a></li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a ng-click="docsCtrl.scrollTo('extend')">Extending AWM</a>
+                    <!--<ul>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('extendIntro')">Introduction</a></li>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('interceptEvents')">Intercepting incoming events</a></li>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('clientViews')">Client-side views</a></li>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('additionalApis')">Exposing additional APIs</a></li>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('realTime')">Real-time communication</a></li>-->
+                    <!--</ul>-->
+                </li>
+
+
+            </ul>
+        </div>
+
+        <div class="col-sm-9 col-xs-12">
+            <h1>Documentation</h1>
+            <p>
+                No one likes reading the docs :) so why not watch a quick-start video instead and get up and running in no-time!<br/>
+                If you're interested in going beyond the basics, like extending AWM functionality read on.
+            </p>
+
+            <h2 id="setup">Setup</h2>
+                <div class="alert alert-info" role="alert">
+                    <strong>Secure Redirect URI</strong> Asana requires that apps using the OAuth authentication flow use an HTTPS Redirect URI.<br/>
+                    For local development use, it's easy (and free) by using tools like <a href="https://ngrok.com/" target="_blank">ngork</a> or <a href="https://localtunnel.github.io/www/" target="_blank">LocalTunnel</a><br/>
+                    * Please note I am not affiliated with any of the above, and consider this as a suggestion only :)
+
+                </div>
+                <h3 id="createApp">Creating an Asana App</h3>
+                <p>
+                    1. Login into to your Asana account and Select <b>My Profile Settings...</b> for the top right user menu<br/>
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step1.jpg">
+                </p>
+                <p>
+                    2. Select the <b>Apps</b> tab from the top menu
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step2.jpg">
+                </p>
+                <p>
+                    3. Select <b>Manage Developer Apps</b>
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step3.jpg">
+                </p>
+                <p>
+                    4. Click on <b>+Add New Application</b>
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step4.jpg">
+                </p>
+                <p>
+                    5. Fill in all three fields, and mark the "agreement" checkbox then click <b>Create</b><br/>
+                    The redirect url value must be your own server root address, appended with <b>"/oauth/asana"</b>
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step5.jpg">
+                </p>
+                <p>
+                    6. Congrats! you've just created an Asana Application.  Before clicking <b>Save</b>, copy all values underlined below, You'll need to paste them into <a href="">AWM Configuration File</a> before you can start using AWM<br/>
+
+                    <img class="awm-img-full-width" src="img/documentation/create_app/step6.jpg">
+                </p>
+
+                <h3 id="updateConfig">Updating configuration</h3>
+                <p>
+                    AWM uses Asana's OAuth flow to allow you to "Login with Asana".<br/>
+                    Using your text editor of choice, please update the configuration file located at <b><"your awm directory">/config/asana.js</b><br/>
+                    Following the values from screenshots above, your modified configuration file should look very similar to this:
+                    <pre><code code-highlight>
+module.exports = {
+    clientId: "304364573959829",
+    clientSecret: "392ab438bf979973d0cc12a0ed6da8b0",
+    redirectUri: "https://a2bd603f.ngrok.io/oauth/asana",
+};
+                    </code></pre>
+                </p>
+
+                <h3 id="httpsSupport">HTTPS support</h3>
+                <p>
+                    The following example uses ngrok.
+                    Download it <a href="https://ngrok.com/download" target="_blank">here</a>, then open up your terminal and run <b>"ngrok http 3000"</b>.<br/>
+                    If you're terminal is showing something similar to what's below, it means things are working OK, and that whatever is running at localhost:3000 is now available both via http and https to the world.<br/>
+                    Before you try accessing yout https endpoint, please read one more step below to <a href="">start your AWM server</a>
+                    <pre><code code-highlight>
+Tunnel Status                 online
+Version                       2.0/2.0
+Web Interface                 http://127.0.0.1:4040
+Forwarding                    http://a2bd603f.ngrok.io -> localhost:3000
+Forwarding                    https://a2bd603f.ngrok.io -> localhost:3000
+
+Connnections                  ttl     opn     rt1     rt5     p50     p90
+0       0       0.00    0.00    0.00    0.00
+                    </code></pre>
+                </p>
+                <p>
+                    More documentation is available on the ngork website: <a href="https://ngrok.com/docs">https://ngrok.com/docs</a>
+                </p>
+
+            <h2 id="usingAwm">Using AWM</h2>
+                <h3 id="startServer">Starting the server</h3>
+                <p>
+                    AWM requires NodeJS (v6.9 or higher) to run. You can download it from <a href="https://nodejs.org/en/download" target="_blank">Node's official website</a>
+                    Once you have node install, using another terminal session (to keep ngrok running) cd to your AWM folder and run <b>"node server.js"</b>. You should see an "AWM Server started!" message:
+                    <pre><code code-highlight>
+> node server.js
+AWM Server started!
+                    </code></pre>
+
+                    You should now be able to access the web interface for AWM, available at your <b>https url as shown on screen in your terminal running the ngrok tunnel</b>.
+
+                </p>
+
+                <h3 id="logginIn">Logging in</h3>
+                <p>
+                    Easily login with Asana by using a built-in url in AWM, Simply point your browser <b><YourHost>/oauth/asana/login</b> and have AWM automatically redirect to your Asana-app authentication page
+                </p>
+                <p>
+                    Please note you must have your <a ng-click="docsCtrl.scrollTo('updateConfig')">configuration file</a> updated with your app's details first.
+                </p>
+
+
+                <h3 id="manageWebhook">Managing webhooks</h3>
+                <p>
+                    1. AWM supports managing webhooks subscriptions for all projects, in all workspaces.<br/>
+                    Once logged in, use the <b>Manage</b> tab to view a list of all available workspaces:<br/>
+                    <img class="awm-img-full-width" src="img/documentation/manage_webhooks/manage_step1.jpg">
+                </p>
+
+                <p>
+                    2. Click <b>View projects</b> to list all available projects in a workspace<br/>
+                    then click <b>Subscribe</b> register a webhook for the selected project<br/>
+                    <img class="awm-img-full-width" src="img/documentation/manage_webhooks/manage_step2.jpg">
+                </p>
+
+                <p>
+                    3. Click <b>Unsubscribe</b> to remove an existing webhook subscription<br/>
+                    <img class="awm-img-full-width" src="img/documentation/manage_webhooks/manage_step3.jpg">
+                </p>
+
+                <h3 id="viewEvents">Viewing events (real-time)</h3>
+                <p>
+                    Once your subscriptions are in place, you can watch incoming event in real-time, under the <b>Live view</b> tab<br/>
+                    If you'd like to extend the current basic implementation, please see read below on <a ng-click="docsCtrl.scrollTo('extend')">extending AWM</a><br/>
+                    <img class="awm-img-full-width" src="img/documentation/events/live_view.jpg">
+                </p>
+
+            <h2 id="deployment">Deployment</h2>
+                <h3 id="security">Security considerations</h3>
+                <p>
+                    While AWM handles most common technicalities for working with Asana webhooks, it tries to be as slim as possible.<br/>
+                    Therefore, there are a few remaining security recommendations to consider when deploying to a live production server:
+                    <ol>
+                        <li>
+                            <b>Restrict access to AWM server.</b>
+                            <br/>This can be achieved by adding additional authentication logic,
+                            modifying AWM to only accept specific email address, or by deploying into a VPC.
+                        </li>
+                        <li>
+                            <b>Verify Incoming events source.</b>
+                            <br/>During a webhook creation process Asana sends a "handshake" request with a unique header ('X-Hook-Secret').
+                            You should store this value to your storage engine of choice, and verify incoming events request against it.<br/>
+                            Read more about securing incoming event request on the
+                            <a href="https://asana.com/developers/api-reference/webhooks#receive" target="_blank">official Asana documentation</a>.
+                        </li>
+                    </ol>
+                </p>
+
+                <h3 id="targetUri">Webhook target URI</h3>
+                <p>
+                    AWM creates and expects to receive event notifications to "https://<i>hostname</i>/events/incoming/<i>resourceId</i>".<br/>
+                    For increased security, AWM will support modifying this url in the next version.
+                </p>
+
+            <h2 id="extend">Extending AWM</h2>
+                <h3 id="extendIntro">Coming soon</h3>
+                <!--<h3 id="extendIntro">Introduction</h3>-->
+                <!--<p></p>-->
+
+                <!--<h3 id="interceptEvents">Intercepting incoming events</h3>-->
+                <!--<p></p>-->
+
+                <!--<h3 id="clientViews">Client-side views</h3>-->
+                <!--<p></p>-->
+
+                <!--<h3 id="additionalApis">Exposing additional APIs</h3>-->
+                <!--<p></p>-->
+
+                <!--<h3 id="realTime">Real-time communication</h3>-->
+                <!--<p></p>-->
+
+        </div>
+    </div>
+
+</div>

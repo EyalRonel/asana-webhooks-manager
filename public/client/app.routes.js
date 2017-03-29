@@ -57,7 +57,9 @@ awmApp.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvi
 			url: '/docs',
 			views: {
 				'body':{
-					templateUrl: '/client/views/docs.html'
+					templateUrl: '/client/views/docs.html',
+					controller: 'docsController',
+					controllerAs: 'docsCtrl'
 				}
 			}
 		})

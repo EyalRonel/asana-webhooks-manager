@@ -36,14 +36,10 @@
 				var AWMUser = new AWM.User(payload.id,payload.name,payload.email,photo,workspaces);
 				this.userService.setUser(AWMUser);
 
-				console.log(AWMUser);
-
-				console.log('resolve');
 				deferred.resolve(this.userService.getUser());
 
 			}.bind(this),
 			function(err){
-				console.log('reject');
 				deferred.resolve(null);
 			}.bind(this)
 		);
