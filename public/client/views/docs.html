@@ -33,13 +33,13 @@
 
                 <li class="">
                     <a ng-click="docsCtrl.scrollTo('extend')">Extending AWM</a>
-                    <ul>
-                        <li><a ng-click="docsCtrl.scrollTo('extendIntro')">Introduction</a></li>
-                        <li><a ng-click="docsCtrl.scrollTo('interceptEvents')">Intercepting incoming events</a></li>
-                        <li><a ng-click="docsCtrl.scrollTo('clientViews')">Client-side views</a></li>
-                        <li><a ng-click="docsCtrl.scrollTo('additionalApis')">Exposing additional APIs</a></li>
-                        <li><a ng-click="docsCtrl.scrollTo('realTime')">Real-time communication</a></li>
-                    </ul>
+                    <!--<ul>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('extendIntro')">Introduction</a></li>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('interceptEvents')">Intercepting incoming events</a></li>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('clientViews')">Client-side views</a></li>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('additionalApis')">Exposing additional APIs</a></li>-->
+                        <!--<li><a ng-click="docsCtrl.scrollTo('realTime')">Real-time communication</a></li>-->
+                    <!--</ul>-->
                 </li>
 
 
@@ -165,30 +165,55 @@ AWM Server started!
                 </p>
 
                 <h3 id="viewEvents">Viewing events (real-time)</h3>
-                <p></p>
+                <p>
+                    Once your subscriptions are in place, you can watch incoming event in real-time, under the <b>Live view</b> tab<br/>
+                    If you'd like to extend the current basic implementation, please see read below on <a ng-click="docsCtrl.scrollTo('extend')">extending AWM</a><br/>
+                    <img class="awm-img-full-width" src="img/documentation/events/live_view.jpg">
+                </p>
 
             <h2 id="deployment">Deployment</h2>
                 <h3 id="security">Security considerations</h3>
-                <p></p>
+                <p>
+                    While AWM handles most common technicalities for working with Asana webhooks, it tries to be as slim as possible.<br/>
+                    Therefore, there are a few remaining security recommendations to consider when deploying to a live production server:
+                    <ol>
+                        <li>
+                            <b>Restrict access to AWM server.</b>
+                            <br/>This can be achieved by adding additional authentication logic,
+                            modifying AWM to only accept specific email address, or by deploying into a VPC.
+                        </li>
+                        <li>
+                            <b>Verify Incoming events source.</b>
+                            <br/>During a webhook creation process Asana sends a "handshake" request with a unique header ('X-Hook-Secret').
+                            You should store this value to your storage engine of choice, and verify incoming events request against it.<br/>
+                            Read more about securing incoming event request on the
+                            <a href="https://asana.com/developers/api-reference/webhooks#receive" target="_blank">official Asana documentation</a>.
+                        </li>
+                    </ol>
+                </p>
 
                 <h3 id="targetUri">Webhook target URI</h3>
-                <p></p>
+                <p>
+                    AWM creates and expects to receive event notifications to "https://<i>hostname</i>/events/incoming/<i>resourceId</i>".<br/>
+                    For increased security, AWM will support modifying this url in the next version.
+                </p>
 
             <h2 id="extend">Extending AWM</h2>
-                <h3 id="extendIntro">Introduction</h3>
-                <p></p>
+                <h3 id="extendIntro">Coming soon</h3>
+                <!--<h3 id="extendIntro">Introduction</h3>-->
+                <!--<p></p>-->
 
-                <h3 id="interceptEvents">Intercepting incoming events</h3>
-                <p></p>
+                <!--<h3 id="interceptEvents">Intercepting incoming events</h3>-->
+                <!--<p></p>-->
 
-                <h3 id="clientViews">Client-side views</h3>
-                <p></p>
+                <!--<h3 id="clientViews">Client-side views</h3>-->
+                <!--<p></p>-->
 
-                <h3 id="additionalApis">Exposing additional APIs</h3>
-                <p></p>
+                <!--<h3 id="additionalApis">Exposing additional APIs</h3>-->
+                <!--<p></p>-->
 
-                <h3 id="realTime">Real-time communication</h3>
-                <p></p>
+                <!--<h3 id="realTime">Real-time communication</h3>-->
+                <!--<p></p>-->
 
         </div>
     </div>
