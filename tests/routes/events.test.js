@@ -4,6 +4,7 @@ var supertest = require('supertest');
 var expect = require('expect');
 var express = require('express');
 const bodyParser = require('body-parser');
+var io;
 
 const eventsController = require('../../controllers/EventsController');
 
@@ -18,8 +19,10 @@ describe('Events route', function () {
 		app = express();
 		app.use( bodyParser.json());
 		app.use(bodyParser.urlencoded({extended: true}));
-		route = proxyquire('../../routes/events', {})(app);
 		request = supertest(app);
+		io = require('socket.io')(request);
+		route = proxyquire('../../routes/events', {})(app,io);
+
 
 	});
 
@@ -49,7 +52,6 @@ describe('Events route', function () {
 
 		request
 			.post('/events/incoming/123')
-			.field('events', [])
 			.send({events:[]})
 			.end(function(err,res){
 				expect(res.statusCode).toBe(200);

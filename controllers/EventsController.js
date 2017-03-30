@@ -24,9 +24,7 @@ class EventsController extends AWMController {
 	}
 
 	handle(){
-		console.log('------------');
-		console.log(this.request().body.events);
-		console.log('------------');
+		//console.log(this.request().body.events);
 		this.socket.emit('events', this.request().body.events);
 
 		return this.reply(200,{});
