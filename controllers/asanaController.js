@@ -1,4 +1,5 @@
 const AWMController = require('./AWMController');
+const asanaConfig = require('../helpers/configHelper');
 const asana = require('../helpers/asanaClient');
 
 class AsanaController extends AWMController {
@@ -8,8 +9,10 @@ class AsanaController extends AWMController {
 		//Init parent
 		super(req, res);
 
+		if (!asanaConfig.isReady()) return this.reply(501, {}, "Please update the AWM with your Asana App credentials configuration file");
+
 		//Verify user access
-		if (!req.cookies.token) return this.reply(400, {}, "Unauthorized request, please login with Asana");
+		if (!req.cookies.token) return this.reply(401, {}, "Unauthorized request, please login with Asana");
 
 		//Init Asana client
 		this.client = asana(req.cookies.token);

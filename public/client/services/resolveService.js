@@ -36,11 +36,14 @@
 				var AWMUser = new AWM.User(payload.id,payload.name,payload.email,photo,workspaces);
 				this.userService.setUser(AWMUser);
 
+				this.asanaService.ready = true;
+
 				deferred.resolve(this.userService.getUser());
 
 			}.bind(this),
-			function(err){
-				deferred.resolve(null);
+			function(response){
+				if (response.data.code == 501) this.asanaService.ready = false;
+				deferred.resolve(response.data);
 			}.bind(this)
 		);
 

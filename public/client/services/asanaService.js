@@ -10,6 +10,14 @@
 		this.$q       = $q;
 		this.config   = config;
 
+		/**
+		 * ready - a Boolean variable that represents that state of Asana Client Configuration on the server!
+		 * it's value is determined once the Promise for the parent route of the Angular app resolves or rejects
+		 *
+		 * This value remains false, a (bootstrap) alert will be present above the header, in the apps web interface, asking the user to update the server-side config file with their Asana App credentials
+		 * */
+		this.ready = true;
+
 	};
 
 	/**

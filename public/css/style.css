@@ -13,6 +13,11 @@
     padding-bottom: 60px;
 }
 
+.awm-alert {
+    margin-bottom: 0px;
+    border-radius: 0px;
+};
+
 .awm-sidebar { list-style: none; margin-top:65px; }
 .awm-sidebar li { padding: 3px 0px; margin-top: 10px;  }
 .awm-sidebar li ul { padding-left: 10px;}
