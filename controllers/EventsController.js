@@ -1,3 +1,5 @@
+'use strict';
+
 const AWMController = require('./AWMController');
 
 class EventsController extends AWMController {

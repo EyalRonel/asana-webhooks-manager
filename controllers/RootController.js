@@ -1,3 +1,5 @@
+'use strict';
+
 const AWMController = require('./AWMController');
 const path = require("path");
 

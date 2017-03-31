@@ -1,3 +1,5 @@
+'use strict';
+
 const AWMController = require('./AWMController');
 const asanaConfig = require('../helpers/configHelper');
 const asana = require('../helpers/asanaClient');

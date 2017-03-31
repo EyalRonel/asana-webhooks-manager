@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * AWMController - A Base controller with utility methods
  * Mainly used to validate auth, define a default JSON response structor and helper methods, etc
