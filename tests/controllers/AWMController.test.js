@@ -47,10 +47,51 @@ describe('AWM Controller', function () {
 
 		AWMCtrl.reply(responseCode,responseData);
 
-		expect(mockResponse._status).toEqual(200);
+		expect(mockResponse._status).toEqual(responseCode);
 		expect(mockResponse._json).toEqual({code: responseCode, data: responseData, msg: expecetedResponseMsg});
 
 		done();
+	});
+
+	it('should return a empty string, if no message was defined for the provided code - test for code 500',function(done){
+
+		var responseCode = 500;
+		var responseData = {key:"value"};
+
+		var expecetedResponseMsg = "";
+
+		AWMCtrl.reply(responseCode,responseData);
+
+		expect(mockResponse._status).toEqual(responseCode);
+		expect(mockResponse._json).toEqual({code: responseCode, data: responseData, msg: expecetedResponseMsg});
+
+		done();
+	});
+
+	it('should support passing an undefined data payload',function(done){
+
+		var responseCode = 200;
+		var responseData = undefined;
+
+		var expecetedResponseMsg = "OK";
+
+		AWMCtrl.reply(responseCode,responseData);
+
+		expect(mockResponse._status).toEqual(responseCode);
+		expect(mockResponse._json).toEqual({code: responseCode, data: {}, msg: expecetedResponseMsg});
+
+		done();
+	});
+
+	it('should throw an exception when calling reply() without a code argument',function(done){
+
+		var throwingMethod = function(){
+			AWMCtrl.reply();
+		};
+
+		expect(throwingMethod).toThrow(/AWMController response must contain a status code/);
+		done();
+
 	});
 
 });

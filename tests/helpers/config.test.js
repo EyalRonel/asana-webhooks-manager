@@ -11,11 +11,16 @@ var fakeConfig={
 	redirectUri: "http://www.fakeurl.com"
 };
 
+var incompleteConfig={
+	clientId: "ABCDEFG",
+	clientSecret: "",
+	redirectUri: null
+};
+
 /**
  * Module under test, with stubs
  * */
-const configHelper = proxyquire('../../helpers/configHelper', {'../config/asana':fakeConfig}
-);
+var configHelper = proxyquire('../../helpers/configHelper', {'../config/asana':fakeConfig});
 
 
 /**
@@ -24,7 +29,7 @@ const configHelper = proxyquire('../../helpers/configHelper', {'../config/asana'
 describe('Config helper',function(){
 
 	beforeEach(function () {
-
+		var configHelper = proxyquire('../../helpers/configHelper', {'../config/asana':fakeConfig});
 	});
 
 	afterEach(function(){
@@ -41,6 +46,16 @@ describe('Config helper',function(){
 
 	it('Should return a redirect uri',function(){
 		expect(configHelper.getRediectUri()).toBe(fakeConfig.redirectUri);
+	});
+
+	it('Should return a "ready" if all configurations were specified',function(){
+		var configHelper = proxyquire('../../helpers/configHelper', {'../config/asana':fakeConfig});
+		expect(configHelper.isReady()).toBe(true);
+	});
+
+	it('Should return a "not ready" if configurations were not specified',function(){
+		var configHelper = proxyquire('../../helpers/configHelper', {'../config/asana':incompleteConfig});
+		expect(configHelper.isReady()).toBe(false);
 	});
 
 });
