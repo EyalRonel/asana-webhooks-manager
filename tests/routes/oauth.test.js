@@ -52,17 +52,20 @@ describe('OAuth route', function () {
 
 		});
 
-		//it('Should call convert code to token when code is present', function (done) {
-		//
-		//	request
-		//		.get('/oauth/asana')
-		//		.query({code: '123445'})
-		//		.expect(0, function (err, res) {
-		//			//expect(res.statusCode).toBeGreaterThanOrEqualTo(301, 'Expecting rediect code of 301');
-		//			//expect(res.statusCode).toBeLessThanOrEqualTo(302, 'Expecting rediect code of 302');
-		//			done();
-		//		});
-		//});
+		it('Should call convert code to token when code is present', function (done) {
+
+
+			accessTokenFromCodeStub.callsFake(function(){this.reply(200,{});});
+
+
+			request
+				.get('/oauth/asana')
+				.query({code: '123445'})
+				.expect(0, function (err, res) {
+					expect(accessTokenFromCodeStub.calledOnce).toBeTruthy();
+					done();
+				});
+		});
 
 
 });
