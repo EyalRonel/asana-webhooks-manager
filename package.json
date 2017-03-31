@@ -4,8 +4,9 @@
   "description": "Asana Webhooks Manager - Easily manage Asana webhooks and receive event payloads",
   "main": "server.js",
   "scripts": {
-    "test": "mocha tests/**/*.test.js",
-    "test-watch": "nodemon --exec \"npm test\""
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha tests/**/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\"",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,9 @@
     "socket.io": "^1.7.3"
   },
   "devDependencies": {
+    "coveralls": "^2.13.0",
     "expect": "^1.20.2",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nock": "^9.0.9",
     "proxyquire": "^1.7.11",
