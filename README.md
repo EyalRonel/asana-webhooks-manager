@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/EyalRonel/asana-webhooks-manager.svg?branch=master)](https://travis-ci.org/EyalRonel/asana-webhooks-manager)
+
 # Asana Webhooks Manager and Event Handler (AWM)
 AWM is an open-source, webhooks management and event handling server for [Asana](http://www.asana.com)  
 Consider AWM as your starting point (and time saver) for creating your own real-time applications on top of Asana's webhooks machanism.  
