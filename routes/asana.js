@@ -38,8 +38,6 @@ var registerRoutes = function(app,io){
 	 * */
 	router.get('/webhooks/:workspaceId',function(req,res) {
 
-		if (!req.params.workspaceId) return response(res,400,{},"Missing workspaceId");
-
 		asanaCtrl.getWebhooks(req.params.workspaceId)
 
 	});
@@ -48,8 +46,6 @@ var registerRoutes = function(app,io){
 	 * POST /webhoooks/<resourceId> - creates a webhook for a specific resource
 	 * */
 	router.post('/webhooks/:resourceId',function(req,res) {
-
-		if (!req.params.resourceId) return response(res, 400, {}, "Missing resourceId");
 
 		return asanaCtrl.createWebhook(req.params.resourceId);
 
@@ -61,8 +57,6 @@ var registerRoutes = function(app,io){
 	 * */
 	router.delete('/webhooks/:webhookId',function(req,res){
 
-		if (!req.params.webhookId) return response(res, 400, {}, "Missing webhookId");
-
 		return asanaCtrl.removeWebhook(req.params.webhookId);
 
 
@@ -72,8 +66,6 @@ var registerRoutes = function(app,io){
 	 * GET /projects - returns a list of projects for a given workspaceId and their webhookIds if available
 	 * */
 	router.get('/projects/:workspaceId',function(req,res) {
-
-		if (!req.params.workspaceId) return response(res,400,{},"Missing workspaceId");
 
 		return asanaCtrl.getProjectsWithWebhooks(req.params.workspaceId);
 
