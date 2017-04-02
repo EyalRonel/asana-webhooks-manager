@@ -22,7 +22,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat-start="event in eventsCtrl.incomingEvents track by $index">
+                        <tr ng-repeat-start="event in eventsCtrl.events track by $index">
                             <td scope="row">{{$index+1}}</td>
                             <td>{{event.getResource()}}</td>
                             <td>{{event.getUser()}}</td>

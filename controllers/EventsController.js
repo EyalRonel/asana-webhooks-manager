@@ -4,7 +4,7 @@ const AWMController = require('./AWMController');
 
 class EventsController extends AWMController {
 
-	constructor(req, res,io) {
+	constructor(req, res, io) {
 		super(req, res);
 
 		this.socket = io;

@@ -1,46 +1,33 @@
 (function(){
 
-	var eventsController = function($scope){
+	var eventsController = function($rootScope, $scope, eventsService){
 
+		this.$rootScope = $rootScope;
 		this.$scope = $scope;
-		this.incomingEvents = [];
-		this.socket = io();
 
-		this.socket.connect();
+		this.events = [];
+		this.eventsListener = null;
 
-		this.socket.on('connect', function (data) {
-			//console.log('Client connected');
-		});
+		this.eventsService = eventsService;
+		this.eventsService.listen();
 
-		this.socket.on('disconnect', function (data) {
-			//console.log('Client disconnected');
-		});
-
-		this.socket.on('events',function(data){
-			//console.log('event',data);
-			//for (var i=data.length-1;i>=0;i--){
-			for(var i=0;i<data.length;i++){
-
-				var eventObject = new AWM.Event()
-					.setResource(data[i].resource)
-					.setUser(data[i].resource)
-					.setType(data[i].type)
-					.setAction(data[i].action)
-					.setCreatedAt(data[i].created_at)
-					.setParent(data[i].parent);
-
-				this.incomingEvents.push(eventObject);
-			}
+		this.eventsListener = this.$rootScope.$on('events', function (event, data) {
+			this.events = this.eventsService.getEvents();
 			this.$scope.$apply();
-
 		}.bind(this));
 
 		$scope.$on('$destroy', function(){
-			this.socket.disconnect();
+
+			//Stop listening to notifications from eventService
+			this.eventsListener();
+
+			//Close websocket connection
+			this.eventsService.close();
+
 		}.bind(this));
 
 	};
 
-	awmApp.controller('eventsController', ['$scope',eventsController]);
+	awmApp.controller('eventsController', ['$rootScope', '$scope', 'eventsService' ,eventsController]);
 
 })();
