@@ -25,7 +25,7 @@
 	 * */
 	eventsService.prototype.listen = function(){
 
-		if (this.socket == null ) this.socket = io();
+		if (this.socket == null ) this.socket = io('/events');
 
 		this.socket.connect();
 

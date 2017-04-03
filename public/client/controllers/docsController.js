@@ -7,6 +7,8 @@
 		this.$anchorScroll = $anchorScroll;
 		this.$anchorScroll.yOffset = 10;
 
+		this.temp = 25;
+
 		$scope.$on('$destroy', function(){
 
 		}.bind(this));
@@ -17,6 +19,11 @@
 		this.$location.hash(elementId);
 		this.$anchorScroll();
 	};
+
+	docsController.prototype.tempIsLargerThan = function(int){
+		if (this.temp > int) return true;
+		else return false;
+	}
 
 	awmApp.controller('docsController', ['$scope','$location', '$anchorScroll',docsController]);
 

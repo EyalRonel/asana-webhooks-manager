@@ -25,7 +25,13 @@ describe('Events Controller', function () {
 		var testHeaderValue = 'fakeHeaderValue';
 
 		mockRequest.set('X-Hook-Secret',testHeaderValue);
-		eventsCtrl = new EventsController(mockRequest,mockResponse);
+		var mockIO = {
+			_of:'',
+			of:function(namepsapce){
+				this._of = namepsapce;
+			}
+		};
+		eventsCtrl = new EventsController(mockRequest,mockResponse,mockIO);
 
 		eventsCtrl.onIncomingEvents();
 

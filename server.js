@@ -7,6 +7,7 @@ var server = null;
 var io;
 
 if(!module.parent){
+
 	server = app.listen(3000,function(){ console.log('AWM Server started!'); });
 
 	app.use( bodyParser.json()); // to support JSON-encoded bodies
@@ -15,18 +16,13 @@ if(!module.parent){
 	app.use(express.static(__dirname + '/public'));
 	app.use(cookieParser());
 
+	//Listen on the "/event" namespace
 	io = require('socket.io')(server);
-
-	//New incoming websocket connection
-	io.on('connection', function(socket){
-
-		//Register diconnect callback
+	io.of('/events').on('connection', function(socket){
 		socket.on('disconnect', function() {
 			socket.disconnect();
 		});
-
 	});
-
 
 }
 registerRoutes(app,io);
@@ -36,3 +32,4 @@ registerRoutes(app,io);
 
 
 module.exports.app = app;
+
