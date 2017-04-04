@@ -2,6 +2,7 @@
 
 const AWMController = require('./AWMController');
 const AWMEvent = require('../models/event');
+const AWMWebhook = require('../models/webhook');
 const mongodb = require('../helpers/mongodbHelper');
 
 class EventsController extends AWMController {
@@ -22,6 +23,15 @@ class EventsController extends AWMController {
 
 		//Get X-Hook-Secret form the request object
 		var xHookSecret = this.request().get('X-Hook-Secret');
+
+		//Store webhook secret for validatin incoming event request
+		mongodb.getConnection();
+		new AWMWebhook({
+			resource_id: this.request().params.resourceId,
+			secret: xHookSecret
+		}).save();
+
+		//Response to in-flight webhook creation request
 		this.response().set('X-Hook-Secret',xHookSecret);
 		return this.reply(200,{});
 
@@ -29,9 +39,13 @@ class EventsController extends AWMController {
 
 	handle(){
 
+		var xHookSignature = this.request().get('X-Hook-Signature');
+
 		mongodb.getConnection();
 
 		var eventsArray = this.request().body.events;
+
+		console.log(eventsArray);
 
 		AWMEvent.insertMany(eventsArray, function(error, docs) {
 			//if (error)
