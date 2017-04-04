@@ -1,6 +1,8 @@
 'use strict';
 
 const AWMController = require('./AWMController');
+const AWMEvent = require('../models/event');
+const mongodb = require('../helpers/mongodbHelper');
 
 class EventsController extends AWMController {
 
@@ -26,7 +28,16 @@ class EventsController extends AWMController {
 	}
 
 	handle(){
-		//console.log(this.request().body.events);
+
+		mongodb.getConnection();
+
+		var eventsArray = this.request().body.events;
+
+		AWMEvent.insertMany(eventsArray, function(error, docs) {
+			//if (error)
+		});
+
+
 		this.socket.emit('events', this.request().body.events);
 
 		return this.reply(200,{});
