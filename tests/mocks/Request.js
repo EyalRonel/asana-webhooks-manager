@@ -2,6 +2,8 @@ module.exports = {
 
 	headers:{},
 	cookies:{},
+	params:{},
+	body:{},
 
 	cookie:function(key,val,options){
 		this.cookies[key] =  val;
