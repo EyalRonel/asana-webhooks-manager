@@ -5,8 +5,10 @@ var expect = require('expect');
 
 var mockResponse = require('../mocks/Response');
 var mockRequest = require('../mocks/Request');
+var mockMongoDB = require('../mocks/mongodb');
 
 var asanaClient = require('../../helpers/asanaClient');
+var AWMWebhook = require('../../models/webhook');
 
 
 describe('Asana Controller', function () {
@@ -75,7 +77,9 @@ describe('Asana Controller', function () {
 			}
 		);
 
-		var AsanaController = proxyquire('../../controllers/AsanaController',{'../helpers/asanaClient':asanaClientStub});
+		var AsanaController = proxyquire('../../controllers/AsanaController',{
+			'../helpers/asanaClient':asanaClientStub
+		});
 
 		mockRequest.cookie('token','123456789');
 		var AsanaCtrl = new AsanaController(mockRequest,mockResponse);
@@ -282,23 +286,46 @@ describe('Asana Controller', function () {
 					webhooks: {
 						deleteById:function(webhookId){
 							return new Promise(function(resolve,reject){
-								setTimeout(function(){resolve({data:[]});},0);
+								setTimeout(function(){resolve({})},0);
 							});
 						}
 					}
 				}
-			}
-		);
+		});
 
-		var AsanaController = proxyquire('../../controllers/AsanaController',{'../helpers/asanaClient':asanaClientStub});
+		var AWMWebhookExecStub = sandbox.stub().callsFake(function(){
+			return new Promise(function(resolve,reject){
+				setTimeout(function(){resolve({})},0);
+			});
+		});
+
+		var AWMWebhookStub = {
+				find:function(){
+					return {
+						remove: function(){
+							return {
+								exec: AWMWebhookExecStub
+							}
+						}
+					}
+				}
+			};
+
+		var AsanaController = proxyquire('../../controllers/AsanaController',{
+			'../helpers/mongodbHelper':mockMongoDB,
+			'../helpers/asanaClient':asanaClientStub,
+			'../models/webhook':AWMWebhookStub
+		});
 
 		mockRequest.cookie('token','123456789');
 		var AsanaCtrl = new AsanaController(mockRequest,mockResponse);
 
-		AsanaCtrl.removeWebhook("12345678")
+		AsanaCtrl.removeWebhook("12345678","0987654321")
 			.then(function(response){
-				expect(asanaClientStub.calledOnce).toBeTruthy();
-				expect(AsanaCtrl.response()._json).toEqual({ code: 200, data: { data: [] }, msg: 'Webhook removed!' });
+				expect(asanaClientStub.calledOnce).toBeTruthy("asanaClientStub should be called");
+				expect(AWMWebhookExecStub.calledOnce).toBeTruthy("AWMWebhookExecStub should be called");
+				expect(AsanaCtrl.response()._json).toEqual({ code: 200, data: {}, msg: 'Webhook removed!' });
+
 				done();
 			})
 			.catch(function(err){

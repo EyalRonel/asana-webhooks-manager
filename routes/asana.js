@@ -53,11 +53,11 @@ var registerRoutes = function(app,io){
 	});
 
 	/**
-	 * DELETE /webhooks/<webhookId> - removes a webhook by it's Id
+	 * DELETE /webhooks/<webhookId>/<resourceId> - removes a webhook by it's Id and resourceId
 	 * */
-	router.delete('/webhooks/:webhookId',function(req,res){
+	router.delete('/webhooks/:webhookId/:resourceId',function(req,res){
 
-		return asanaCtrl.removeWebhook(req.params.webhookId);
+		return asanaCtrl.removeWebhook(req.params.webhookId.toString(),req.params.resourceId.toString());
 
 
 	});

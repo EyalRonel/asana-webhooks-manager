@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser')
 
 var AsanaController = require('../../controllers/AsanaController');
 
+
 describe('Asana route', function () {
 
 	var app,
@@ -27,7 +28,7 @@ describe('Asana route', function () {
 		getWorkspacesStub = sandbox.stub(AsanaController.prototype,'getWorkspaces').callsFake(function(){this.reply(200,{});});
 		getWebhooksStub = sandbox.stub(AsanaController.prototype,'getWebhooks').callsFake(function(workspaceId){this.reply(200,{});});
 		createWebhookStub = sandbox.stub(AsanaController.prototype,'createWebhook').callsFake(function(resourceId){this.reply(200,{});});
-		removeWebhookStub = sandbox.stub(AsanaController.prototype,'removeWebhook').callsFake(function(webhookId){this.reply(200,{});});
+		removeWebhookStub = sandbox.stub(AsanaController.prototype,'removeWebhook').callsFake(function(webhookId,resourceId){this.reply(200,{});});
 		getProjectsWithWebhooksStub = sandbox.stub(AsanaController.prototype,'getProjectsWithWebhooks').callsFake(function(workspaceId){this.reply(200,{});});
 
 		app = express();
@@ -100,9 +101,10 @@ describe('Asana route', function () {
 	it('DELETE /webhooks/webhookId - removes a webhook by it\'s Id', function(done){
 
 		var webhookId = "987654321"; //Passed as string, as the request turns an integer to string over http.
+		var resoureId = "1234567890";
 
 		request
-			.delete('/asana/webhooks/'+webhookId)
+			.delete('/asana/webhooks/'+webhookId+'/'+resoureId)
 			.set('Cookie','token=1234567')
 			.expect('Content-Type', /json/)
 			.expect(200, function (err, res) {

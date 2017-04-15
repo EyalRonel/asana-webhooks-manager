@@ -119,13 +119,14 @@
 		return deferred.promise;
 	};
 
-	asanaService.prototype.unsubscribe = function(webhookId){
+	asanaService.prototype.unsubscribe = function(webhookId,resourceId){
 
 		if (typeof webhookId == "undefined") throw new Error("Must provide a webhookId");
+		if (typeof resourceId == "undefined") throw new Error("Must provide a resourceId");
 
 		var deferred = this.$q.defer();
 
-		this.$http.delete(this.config.ASANA_API_WEBHOOKS + '/' + webhookId, {})
+		this.$http.delete(this.config.ASANA_API_WEBHOOKS + '/' + webhookId + '/' + resourceId, {})
 			.then(
 
 				//Success
