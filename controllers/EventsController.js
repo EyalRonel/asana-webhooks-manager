@@ -46,8 +46,7 @@ class EventsController extends AWMController {
 	}
 
 	handle(){
-
-
+		
 		//Verify signature header exists
 		var xHookSignatureHeader = this.request().get('X-Hook-Signature');
 		if (xHookSignatureHeader == null) return this.reply(403,{},"Unauthorized request");
@@ -73,26 +72,6 @@ class EventsController extends AWMController {
 				return this.reply(200,{});
 			}
 		}.bind(this));
-
-
-		//query.exec(function (err, docs) {
-
-			////Webhook was not found, deny request
-			//if (docs.length == 0) return this.reply(400, {},"Unknown webhook");
-			//
-			////Match encrypted request payload against header header, using secret from original webhook handshake
-			//var encryptedRequestBody = CryptoJS.HmacSHA256(JSON.stringify(this.request().body),docs[0].secret).toString();
-			//if (xHookSignatureHeader !== encryptedRequestBody) return this.reply(403,{},"Unauthorized request");
-			//
-			////At this point the request is fully validated and can be processed
-			//var eventsArray = this.request().body.events;
-			//AWMEvent.insertMany(eventsArray, function(error, docs) {});
-			//
-			//this.socket.emit('events', this.request().body.events);
-			//
-			//return this.reply(200,{});
-
-		//}.bind(this));
 
 	}
 

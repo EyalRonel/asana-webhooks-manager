@@ -120,7 +120,7 @@
 	 * Unsubscribe - removes an existing webhook and updates client data model
 	 * */
 	manageController.prototype.unsubscribe = function(workspaceId,projectId,webhookId){
-		this.asanaService.unsubscribe(webhookId)
+		this.asanaService.unsubscribe(webhookId,projectId)
 			.then(function(response){
 				this.projects[workspaceId][projectId].setWebhook(null);
 			}.bind(this))

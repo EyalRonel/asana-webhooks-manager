@@ -4,6 +4,10 @@ const AWMController = require('./AWMController');
 const asanaConfig = require('../helpers/configHelper');
 const asana = require('../helpers/asanaClient');
 
+const mongodb = require('../helpers/mongodbHelper');
+const AWMWebhook = require('../models/webhook');
+
+
 class AsanaController extends AWMController {
 
 	constructor(req, res) {
@@ -121,12 +125,51 @@ class AsanaController extends AWMController {
 	 * removeWebhook - delete (deregister) an existing webhook
 	 *
 	 * @param {Integer} webhookId
+	 * @param {Integer} resourceId
+	 * @param {Function} callback
 	 * @returns {Object}
 	 * */
-	removeWebhook(webhookId){
-		return this.client.webhooks.deleteById(webhookId)
-			.then(function (response) {return this.reply(200,response,"Webhook removed!");}.bind(this))
-			.catch(function (err) { return this.reply(400,{},err) }.bind(this));
+	removeWebhook(webhookId,resourceId){
+
+		var returnedResponse = null;
+
+		var removeWebhook = new Promise(function(resolve,reject){
+			this._unsubscribeWebhookFromAsana(webhookId)
+				.then(function(responseFromAsana){
+					returnedResponse = responseFromAsana;
+					return this._removeWebhookFromDB(resourceId);
+				}.bind(this))
+				.then(function(responseFromDB){
+					resolve(returnedResponse);
+				}.bind(this))
+				.catch(function(err){
+					reject(err);
+				}.bind(this));
+		}.bind(this));
+
+		return removeWebhook
+			.then(function(response){return this.reply(200,response,"Webhook removed!")}.bind(this))
+			.catch(function(err){return this.reply(400,err,"Unable to remove!")}.bind(this));
+
+	}
+
+	/**
+	 * (private) _removeWebhookFromDB - removes a webhook record from AWM internal database
+	 *
+	 * @param {String} resourceId
+	 * @returns {Promise}
+	 * */
+	_removeWebhookFromDB(resourceId){
+		mongodb.getConnection();
+		return AWMWebhook.find().remove({'resource_id':resourceId}).exec();
+	}
+
+	/**
+	 * (private) _unsubscribeWebhookFromAsana - removed a webhook from Asana
+	 * @returns {Promise}
+	 * */
+	_unsubscribeWebhookFromAsana(webhookId){
+		return this.client.webhooks.deleteById(webhookId);
 	}
 
 }

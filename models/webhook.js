@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 var schema = mongoose.Schema({
+	webhook_id: String,
 	resource_id: String,
 	secret: String
 });
