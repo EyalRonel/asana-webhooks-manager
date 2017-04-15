@@ -10,9 +10,12 @@ Consider AWM as your starting point (and time saver) for creating your own real-
 ![Subscribe for real-time event notifications](public/img/documentation/events/live_view.jpg "View incoming events in real-time")  
 
 # Out-of-the-box support for:  
-  - Asana login (OAuth)  
-  - View, add and remove webhooks subcriptions for Projects accross all workspaces  
-  - Receive and view incoming events payloads from Asana in real-time  
+- Login with Asana
+- Webhooks management for all projects and all workspaces (view,add,remove)
+- Handling webhooks "handshake" during creation
+- Accepting webhook events payloads and verifying payload source (hmac2056)
+- A live view for viewing incoming events in real-time
+- Documentation on how to extend and modify
   
 ## Installation  
 
