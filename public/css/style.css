@@ -4,6 +4,7 @@
 .btn-info-asana,.btn-info-asana:visited {background-color:#1aafd0; color:#fff; }
 .btn-info-asana:hover {color:#a177ff;box-shadow:0 0 0 3px rgba(26,175,208,0.3); color:#fff;}
 
+.bold {font-weight: bold;}
 
 .nav-bar-user-image {float:left; position: relative; left: -7px; top: -3px; border-radius: 50%;}
 

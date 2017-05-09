@@ -89,6 +89,7 @@
                 </p>
 
                 <h3 id="updateConfig">Updating configuration</h3>
+                <div class="bold">Asana app configurations <span class="label label-danger">mandatory</span></div>
                 <p>
                     AWM uses Asana's OAuth flow to allow you to "Login with Asana".<br/>
                     Using your text editor of choice, please update the configuration file located at <b><"your awm directory">/config/asana.js</b><br/>
@@ -98,6 +99,22 @@ module.exports = {
     clientId: "304364573959829",
     clientSecret: "392ab438bf979973d0cc12a0ed6da8b0",
     redirectUri: "https://a2bd603f.ngrok.io/oauth/asana",
+};
+                    </code></pre>
+                </p>
+
+
+                <div class="bold">MongoDB configurations <span class="label label-danger">mandatory</span></div>
+                <p>
+                    AWM uses MongoDB to stores webhooks information, to later use for validating incoming event payloads against their "webhook secret".<br/>
+                    In order for AWM to function correctly, you'll need to edit another configuration file located at <b><"your awm directory">/config/mongodb.js</b> with your MongoDB information.<br/>
+                    <pre><code code-highlight>
+module.exports = {
+    username: null,    //MongoDB user (optional)
+    password: null,    //MongoDB password (optional)
+    host: "127.0.0.1", //Mongo hosts
+    port: "27017",     //Port
+    database: "awm"    //Database name
 };
                     </code></pre>
                 </p>
